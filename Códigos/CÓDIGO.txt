@@ -1,0 +1,23 @@
+@Entity
+public class Item {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String nome;
+    private Integer quantidadeEstoque;
+
+    // getters e setters
+}
+
+@Entity
+public class Fornecedor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String nome;
+    private String telefone;
+
+    // getters e setters
+}
+
+// Crie as outras entidades da mesma forma

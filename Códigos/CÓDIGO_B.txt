@@ -1,0 +1,29 @@
+@RestController
+@RequestMapping("/items")
+public class ItemController {
+    @Autowired
+    private ItemRepository itemRepository;
+
+    @GetMapping
+    public List<Item> getAllItems() {
+        return itemRepository.findAll();
+    }
+
+    // Outros métodos para criar, atualizar e excluir itens
+}
+
+@RestController
+@RequestMapping("/fornecedores")
+public class FornecedorController {
+    @Autowired
+    private FornecedorRepository fornecedorRepository;
+
+    @GetMapping
+    public List<Fornecedor> getAllFornecedores() {
+        return fornecedorRepository.findAll();
+    }
+
+    // Outros métodos para criar, atualizar e excluir fornecedores
+}
+
+// Crie os outros controladores da mesma forma

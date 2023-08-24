@@ -1,0 +1,8 @@
+public interface ItemRepository extends JpaRepository<Item, Long> {
+}
+
+public interface FornecedorRepository extends JpaRepository<Fornecedor, Long> {
+}
+
+// Crie os outros repositórios da mesma forma
+
