@@ -1,0 +1,32 @@
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ItemDAO {
+    private static final String URL = "jdbc:mysql://localhost:3306/estoque";
+    private static final String USERNAME = "seu_usuario";
+    private static final String PASSWORD = "sua_senha";
+
+    public List<Item> listarItens() {
+        List<Item> itens = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM tb_item")) {
+
+            while (resultSet.next()) {
+                Item item = new Item();
+                item.setId(resultSet.getInt("id_item"));
+                item.setNome(resultSet.getString("nm_item"));
+                item.setQuantidade(resultSet.getInt("qtd_estoque"));
+                itens.add(item);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return itens;
+    }
+
+    // Outros métodos para manipulação do banco de dados
+}

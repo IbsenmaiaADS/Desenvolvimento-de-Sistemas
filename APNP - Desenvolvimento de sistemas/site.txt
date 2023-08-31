@@ -1,0 +1,120 @@
+Crie um site php para o banco de dados abaixo
+
+CREATE
+create table estoque.tb_item(
+id_item integer,
+nm_item varchar(50) not null,
+qtd_estoque integer not null
+);
+create table estoque.tb_fornecedor(
+id_fornecedor integer,
+nm_fornecedor varchar(50) not null,
+nu_telefone char(11) not null
+);
+create table estoque.tb_item_fornecedor(
+id_fornecedor integer,
+id_item integer,
+vl_item decimal not null
+);
+create table estoque.tb_compra(
+id_compra integer,
+id_fornecedor integer not null,
+dt_compra date not null,
+vl_total decimal not null
+);
+create table estoque.tb_item_compra(
+id_compra integer,
+id_item integer,
+qtd_item integer not null
+);
+PRIMARY KEY
+alter table estoque.tb_item add constraint pk_item primary key (id_item);
+alter table estoque.tb_fornecedor add constraint pk_fornecedor primary key (id_fornecedor);
+alter table estoque.tb_item_fornecedor add constraint pk_item_fornecedor primary key
+(id_fornecedor, id_item);
+alter table estoque.tb_compra add constraint pk_compra primary key (id_compra);
+alter table estoque.tb_item_compra add constraint pk_item_compra primary key (id_compra,
+id_item);
+FOREIGN KEY
+alter table estoque.tb_item_fornecedor add constraint fk_item_fornecedor_fornecedor
+foreign key (id_fornecedor) references estoque.tb_fornecedor;
+alter table estoque.tb_item_fornecedor add constraint fk_item_fornecedor_item foreign key
+(id_item) references estoque.tb_item;
+alter table estoque.tb_compra add constraint fk_compra_fornecedor foreign key
+(id_fornecedor) references estoque.tb_fornecedor;
+alter table estoque.tb_item_compra add constraint fk_item_compra_compra foreign key
+(id_compra) references estoque.tb_compra;
+alter table estoque.tb_item_compra add constraint fk_item_compra_item foreign key
+(id_item) references estoque.tb_item;
+INSERTS ITEM
+INSERT INTO estoque.TB_ITEM VALUES (1, 'Caneta', 31);
+INSERT INTO estoque.TB_ITEM VALUES (2, 'Lápis', 20);
+INSERT INTO estoque.TB_ITEM VALUES (3, 'Caderno', 15);
+INSERT INTO estoque.TB_ITEM VALUES (4, 'Borracha', 12);
+INSERT INTO estoque.TB_ITEM VALUES (5, 'Marcador', 5);
+INSERT INTO estoque.TB_ITEM VALUES (6, 'Estojo', 9);
+INSERT INTO estoque.TB_ITEM VALUES (7, 'Régua', 7);
+INSERT INTO estoque.TB_ITEM VALUES (8, 'Apontador', 4);
+INSERT INTO estoque.TB_ITEM VALUES (9, 'Folha de papel A4', 50);
+INSERT INTO estoque.TB_ITEM VALUES (10, 'Dicionário', 2);
+INSERT INTO estoque.TB_ITEM VALUES (11, 'Mochila escolar', 10);
+INSERT INTO estoque.TB_ITEM VALUES (12, 'Caneta em gel, 15);
+INSERT INTO estoque.TB_ITEM VALUES (13, 'Bloco de notas', 8);
+INSERT INTO estoque.TB_ITEM VALUES (14, 'Grampeador', 3);
+INSERT INTO estoque.TB_ITEM VALUES (15, 'Tesoura', 5);
+INSERTS FORNECEDOR
+INSERT INTO estoque.TB_FORNECEDOR VALUES (1, 'Soares Atacado', '51996572932');
+INSERT INTO estoque.TB_FORNECEDOR VALUES (2, 'Silva Distribuidora',
+'51956789011');
+INSERT INTO estoque.TB_FORNECEDOR VALUES (3, 'Brasil Comércio', '21335487697');
+INSERT INTO estoque.TB_FORNECEDOR VALUES (4, 'Fe Produtos', '51778899001');
+INSERT INTO estoque.TB_FORNECEDOR VALUES (5, 'Mateus Atacadista',
+'51895574410');
+INSERT INTO estoque.TB_FORNECEDOR VALUES (6, 'Varejão do Ramalho',
+'51956789011');
+INSERT INTO estoque.TB_FORNECEDOR VALUES (7, 'Costa & Filhos', '51334455665');
+INSERTS ITEM FORNECEDOR
+INSERT INTO estoque.TB_ITEM_FORNECEDOR VALUES (1, 6, 5.00);
+INSERT INTO estoque.TB_ITEM_FORNECEDOR VALUES (1, 11, 60.00);
+INSERT INTO estoque.TB_ITEM_FORNECEDOR VALUES (1, 10, 5.50);
+INSERT INTO estoque.TB_ITEM_FORNECEDOR VALUES (2, 6, 7.50);
+INSERT INTO estoque.TB_ITEM_FORNECEDOR VALUES (2, 3, 13.00);
+INSERT INTO estoque.TB_ITEM_FORNECEDOR VALUES (2, 15, 11.55);
+INSERT INTO estoque.TB_ITEM_FORNECEDOR VALUES (2, 4, 2.99);
+INSERT INTO estoque.TB_ITEM_FORNECEDOR VALUES (3, 5, 7.00);
+INSERT INTO estoque.TB_ITEM_FORNECEDOR VALUES (4, 12, 2.79);
+INSERT INTO estoque.TB_ITEM_FORNECEDOR VALUES (4, 1, 2.00);
+INSERT INTO estoque.TB_ITEM_FORNECEDOR VALUES (5, 7, 1.00);
+INSERT INTO estoque.TB_ITEM_FORNECEDOR VALUES (5, 2, 0.50);
+INSERT INTO estoque.TB_ITEM_FORNECEDOR VALUES (6, 13, 5.50);
+INSERT INTO estoque.TB_ITEM_FORNECEDOR VALUES (6, 14, 15.30);
+INSERT INTO estoque.TB_ITEM_FORNECEDOR VALUES (7, 9, 10.00);
+INSERT INTO estoque.TB_ITEM_FORNECEDOR VALUES (7, 8, 4.00);
+INSERTS COMPRA
+INSERT INTO estoque.TB_COMPRA VALUES (1, 1, '2023-02-10', 30.00); --COMPROU
+ITEM 6 6X
+INSERT INTO estoque.TB_COMPRA VALUES (2, 1, '2023-01-01', 180.00); --COMPROU
+ITEM 11 3X
+INSERT INTO estoque.TB_COMPRA VALUES (3, 2, '2022-01-01', 93.99); --COMPROU
+ITEM 3 7X E O ITEM 4 1X
+INSERT INTO estoque.TB_COMPRA VALUES (4, 3, '2023-02-10', 21.00); --COMPROU
+ITEM 5 3X
+INSERT INTO estoque.TB_COMPRA VALUES (5, 4, '2023-02-02', 13.95); --COMPROU
+ITEM 12 5X
+INSERT INTO estoque.TB_COMPRA VALUES (6, 5, '2023-02-01', 55.00); --COMPROU
+ITEM 7 30X E O ITEM 2 50X
+INSERT INTO estoque.TB_COMPRA VALUES (7, 6, '2023-01-10', 122.40); --COMPROU
+ITEM 14 8X
+INSERT INTO estoque.TB_COMPRA VALUES (8, 7, '2022-06-03', 200.00); --COMPROU
+ITEM 9 20X
+INSERTS ITEM COMPRA
+INSERT INTO estoque.TB_ITEM_COMPRA VALUES (1, 6, 6);
+INSERT INTO estoque.TB_ITEM_COMPRA VALUES (2, 11, 3);
+INSERT INTO estoque.TB_ITEM_COMPRA VALUES (3, 3, 7);
+INSERT INTO estoque.TB_ITEM_COMPRA VALUES (3, 4, 1);
+INSERT INTO estoque.TB_ITEM_COMPRA VALUES (4, 5, 3);
+INSERT INTO estoque.TB_ITEM_COMPRA VALUES (5, 12, 5);
+INSERT INTO estoque.TB_ITEM_COMPRA VALUES (6, 7, 30);
+INSERT INTO estoque.TB_ITEM_COMPRA VALUES (6, 2, 50);
+INSERT INTO estoque.TB_ITEM_COMPRA VALUES (7, 14, 8);
+INSERT INTO estoque.TB_ITEM_COMPRA VALUES (8, 9,20);
