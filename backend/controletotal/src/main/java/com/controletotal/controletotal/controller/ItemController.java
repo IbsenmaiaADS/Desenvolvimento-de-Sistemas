@@ -1,8 +1,8 @@
 package com.controletotal.controletotal.controller;
 
-import com.controletotal.controletotal.dto.ItemDto;
+import com.controletotal.controletotal.dto.*;
 import com.controletotal.controletotal.entity.Item;
-import com.controletotal.controletotal.service.ItemService;
+import com.controletotal.controletotal.service.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
