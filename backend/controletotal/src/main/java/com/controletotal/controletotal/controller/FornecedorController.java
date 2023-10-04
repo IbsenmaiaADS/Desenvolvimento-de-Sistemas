@@ -30,13 +30,13 @@ public class FornecedorController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Fornecedor>> buscarTodosOsItens() {
+    public ResponseEntity<List<Fornecedor>> buscarTodosOsFornecedores() {
         List<Fornecedor> fornecedores = fornecedorService.buscaTodosOsFornecedores();
         return ResponseEntity.ok(fornecedores);
     }
 
     @GetMapping("/buscar")
-    public ResponseEntity<Fornecedor> buscarItemPorNomeOuId(@RequestParam(required = false) Long id,
+    public ResponseEntity<Fornecedor> buscarFornecedorPorNomeOuId(@RequestParam(required = false) Long id,
                                                             @RequestParam(required = false) String nome) {
         return ResponseEntity.ok(fornecedorService.buscaFornecedor(id, nome));
     }
