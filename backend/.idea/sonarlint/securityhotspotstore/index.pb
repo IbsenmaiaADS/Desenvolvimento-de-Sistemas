@@ -8,8 +8,6 @@ _controletotal/src/main/java/com/controletotal/controletotal/handler/GlobalExcep
 †
 Vcontroletotal/src/main/java/com/controletotal/controletotal/handler/ErroDeNegocio.java,d\5\d5442a23e95f17e10da7929d570efcbbf32249cd
 |
-Lcontroletotal/src/main/java/com/controletotal/controletotal/entity/Item.java,b\e\bec49bf2b835395f2dd7ab61f6b85ce461176444
-|
 Lcontroletotal/src/main/java/com/controletotal/controletotal/dto/ItemDto.java,4\b\4b1c3b8e462334a720ffe0e90b9e5fa8926a32aa
 J
 controletotal/build.gradle,2\4\2474dfb660ec325ee75f7571781aedc9354748c1

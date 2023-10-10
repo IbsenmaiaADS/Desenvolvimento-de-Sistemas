@@ -13,7 +13,8 @@ import lombok.ToString;
 public class Item {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SEQ_ITEM")
+    @SequenceGenerator(sequenceName = "SEQ_ITEM_OID", allocationSize = 1, name = "SEQ_ITEM")
     @Column(name = "id_item")
     private Long id;
 
