@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -68,5 +69,17 @@ public class ItemController {
         itemService.deletaItem(id);
     }
 
+    public ResponseEntity<Item> solicitarItem(
+            @RequestParam(required = false)
+            @NotNull(message = "Id do item é obrigatório")
+            Long idItem,
 
+            @RequestParam(required = false)
+            @NotNull(message = "Quantidade do item é obrigatório")
+            @Positive(message = "Quantidade em estoque deve ser positivo")
+            @DefaultValue(value = "1")
+            Integer quantidade
+    ) {
+        return itemService.solicitarItem(idItem, quantidade);
+    }
 }

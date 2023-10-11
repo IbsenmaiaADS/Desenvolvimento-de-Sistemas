@@ -5,6 +5,7 @@ import com.controletotal.controletotal.entity.Item;
 import com.controletotal.controletotal.handler.ErroDeNegocio;
 import com.controletotal.controletotal.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -68,5 +69,9 @@ public class ItemService {
         if (quantidadeEstoque == null && nome == null) {
             throw new ErroDeNegocio("Nenhuma solicitação de edição especificada. Informe quantidade em estoque ou nome para atualizar");
         }
+    }
+
+    public ResponseEntity<Item> solicitarItem(Long idItem, Integer quantidade) {
+
     }
 }

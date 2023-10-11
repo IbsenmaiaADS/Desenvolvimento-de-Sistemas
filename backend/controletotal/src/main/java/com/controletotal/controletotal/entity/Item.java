@@ -1,13 +1,11 @@
 package com.controletotal.controletotal.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-@Getter
-@Setter
-@ToString
+import java.util.List;
+
+@Data
 @Entity
 @Table(name = "tb_item", schema = "controletotal")
 public class Item {
@@ -23,4 +21,7 @@ public class Item {
 
     @Column(name = "qtd_estoque")
     private Integer quantidadeEstoque;
+
+    @OneToMany(mappedBy = "item")
+    private List<SaidaItem> saidas;
 }
