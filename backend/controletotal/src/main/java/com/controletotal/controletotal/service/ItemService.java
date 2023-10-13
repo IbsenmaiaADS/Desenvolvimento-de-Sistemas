@@ -5,8 +5,8 @@ import com.controletotal.controletotal.entity.Item;
 import com.controletotal.controletotal.handler.ErroDeNegocio;
 import com.controletotal.controletotal.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,12 +20,13 @@ public class ItemService {
     }
 
     public Item buscaItem(Long id, String nome) {
+        validaBuscaItem(id, nome);
+
         if (id != null) {
             return itemRepository.findById(id).orElseThrow(() -> new ErroDeNegocio("Item não encontrado com o ID: " + id));
-        } else if (nome != null) {
+        } else {
             return itemRepository.findByNomeIgnoreCase(nome).orElseThrow(() -> new ErroDeNegocio("Item não encontrado com o nome: " + nome));
         }
-        throw new ErroDeNegocio("Item não encontrado");
     }
 
     public Item cadastraItem(ItemDto itemDto) {
@@ -40,6 +41,7 @@ public class ItemService {
         return itemRepository.save(item);
     }
 
+    @Transactional
     public Item atualizaItem(Long idItem, Integer quantidadeEstoque, String nome) {
         validaEdicao(quantidadeEstoque, nome);
 
@@ -65,13 +67,16 @@ public class ItemService {
         itemRepository.deleteById(idItem);
     }
 
+
+    private void validaBuscaItem(Long id, String nome) {
+        if (id == null && nome == null) {
+            throw new ErroDeNegocio("Nenhuma solicitação especificada. Informe id ou nome para buscar");
+        }
+    }
+
     private void validaEdicao(Integer quantidadeEstoque, String nome) {
         if (quantidadeEstoque == null && nome == null) {
             throw new ErroDeNegocio("Nenhuma solicitação de edição especificada. Informe quantidade em estoque ou nome para atualizar");
         }
-    }
-
-    public ResponseEntity<Item> solicitarItem(Long idItem, Integer quantidade) {
-
     }
 }
