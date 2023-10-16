@@ -46,7 +46,7 @@ public class FornecedorController {
         return ResponseEntity.ok(fornecedorService.cadastraFornecedor(fornecedorDto));
     }
 
-    @PutMapping("/atualizar/{id}")
+    @PatchMapping("/atualizar/{id}")
     public ResponseEntity<Fornecedor> atualizarFornecedor(@PathVariable Long id, @RequestBody FornecedorDto fornecedorDto) {
         return ResponseEntity.ok(fornecedorService.atualizaFornecedor(id, fornecedorDto));
     }

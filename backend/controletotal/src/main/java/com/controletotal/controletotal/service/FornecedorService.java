@@ -1,7 +1,6 @@
 package com.controletotal.controletotal.service;
 
 import com.controletotal.controletotal.dto.FornecedorDto;
-import com.controletotal.controletotal.dto.ItemDto;
 import com.controletotal.controletotal.entity.Fornecedor;
 import com.controletotal.controletotal.handler.ErroDeNegocio;
 import com.controletotal.controletotal.repository.FornecedorRepository;
@@ -28,7 +27,7 @@ public class FornecedorService {
         throw new ErroDeNegocio("Fornecedor não encontrado");
     }
 
-    public Fornecedor cadastraItem(FornecedorDto fornecedorDto) {
+    public Fornecedor cadastraFornecedor(FornecedorDto fornecedorDto) {
         if (fornecedorRepository.findByNomeIgnoreCase(fornecedorDto.getNome()).isPresent()) {
             throw new ErroDeNegocio("Já existe um fornecedor com o mesmo nome");
         }
@@ -40,21 +39,21 @@ public class FornecedorService {
         return fornecedorRepository.save(fornecedor);
     }
 
-    public Fornecedor atualizaItem(Long idItem, ItemDto itemDto) {
-        Fornecedor fornecedor = fornecedorRepository.findById(idItem)
-                .orElseThrow(() -> new ErroDeNegocio("Item não encontrado com o ID: " + idItem));
+    public Fornecedor atualizaFornecedor(Long id, FornecedorDto fornecedorDto) {
+        Fornecedor fornecedor = fornecedorRepository.findById(id)
+                .orElseThrow(() -> new ErroDeNegocio("Fornecedor não encontrado com o ID: " + id));
 
-        if (!fornecedor.getNome().equals(itemDto.getNome()) && itemRepository.findByNomeIgnoreCase(itemDto.getNome()).isPresent()) {
-            throw new ErroDeNegocio("Já existe um item com o mesmo nome");
+        if (!fornecedor.getNome().equals(fornecedorDto.getNome()) && fornecedorRepository.findByNomeIgnoreCase(fornecedorDto.getNome()).isPresent()) {
+            throw new ErroDeNegocio("Já existe um fornecedor com o mesmo nome");
         }
 
-        item.setNome(itemDto.getNome());
-        item.setQuantidadeEstoque(itemDto.getQuantidadeEstoque());
+        fornecedor.setNome(fornecedorDto.getNome());
+        fornecedor.setNumTelefone(fornecedorDto.getNumTelefone());
 
-        return itemRepository.save(item);
+        return fornecedorRepository.save(fornecedor);
     }
 
-    public void deletaItem(Long idItem) {
-        itemRepository.deleteById(idItem);
+    public void deletaFornecedor(Long id) {
+        fornecedorRepository.deleteById(id);
     }
 }

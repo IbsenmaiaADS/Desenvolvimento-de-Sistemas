@@ -12,6 +12,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class FornecedorDto {
+
     @NotBlank(message = "Nome do fornecedor é obrigatório")
     private String nome;
 
