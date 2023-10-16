@@ -6,6 +6,7 @@ import com.controletotal.controletotal.handler.ErroDeNegocio;
 import com.controletotal.controletotal.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,12 +20,13 @@ public class ItemService {
     }
 
     public Item buscaItem(Long id, String nome) {
+        validaBuscaItem(id, nome);
+
         if (id != null) {
             return itemRepository.findById(id).orElseThrow(() -> new ErroDeNegocio("Item não encontrado com o ID: " + id));
-        } else if (nome != null) {
+        } else {
             return itemRepository.findByNomeIgnoreCase(nome).orElseThrow(() -> new ErroDeNegocio("Item não encontrado com o nome: " + nome));
         }
-        throw new ErroDeNegocio("Item não encontrado");
     }
 
     public Item cadastraItem(ItemDto itemDto) {
@@ -39,21 +41,42 @@ public class ItemService {
         return itemRepository.save(item);
     }
 
-    public Item atualizaItem(Long idItem, ItemDto itemDto) {
+    @Transactional
+    public Item atualizaItem(Long idItem, Integer quantidadeEstoque, String nome) {
+        validaEdicao(quantidadeEstoque, nome);
+
         Item item = itemRepository.findById(idItem)
                 .orElseThrow(() -> new ErroDeNegocio("Item não encontrado com o ID: " + idItem));
 
-        if (!item.getNome().equals(itemDto.getNome()) && itemRepository.findByNomeIgnoreCase(itemDto.getNome()).isPresent()) {
+        if (!item.getNome().equals(nome) && itemRepository.findByNomeIgnoreCase(nome).isPresent()) {
             throw new ErroDeNegocio("Já existe um item com o mesmo nome");
         }
 
-        item.setNome(itemDto.getNome());
-        item.setQuantidadeEstoque(itemDto.getQuantidadeEstoque());
+        if (nome != null) {
+            item.setNome(nome);
+        }
+
+        if (quantidadeEstoque != null) {
+            item.setQuantidadeEstoque(quantidadeEstoque);
+        }
 
         return itemRepository.save(item);
     }
 
     public void deletaItem(Long idItem) {
         itemRepository.deleteById(idItem);
+    }
+
+
+    private void validaBuscaItem(Long id, String nome) {
+        if (id == null && nome == null) {
+            throw new ErroDeNegocio("Nenhuma solicitação especificada. Informe id ou nome para buscar");
+        }
+    }
+
+    private void validaEdicao(Integer quantidadeEstoque, String nome) {
+        if (quantidadeEstoque == null && nome == null) {
+            throw new ErroDeNegocio("Nenhuma solicitação de edição especificada. Informe quantidade em estoque ou nome para atualizar");
+        }
     }
 }
