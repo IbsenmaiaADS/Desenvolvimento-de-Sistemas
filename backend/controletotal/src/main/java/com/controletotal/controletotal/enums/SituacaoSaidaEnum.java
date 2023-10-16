@@ -1,5 +1,6 @@
 package com.controletotal.controletotal.enums;
 
+import com.controletotal.controletotal.handler.ErroDeNegocio;
 import lombok.Getter;
 
 @Getter
@@ -12,5 +13,14 @@ public enum SituacaoSaidaEnum {
 
     SituacaoSaidaEnum(int codSituacao) {
         this.codSituacao = codSituacao;
+    }
+
+    public static int getByCodSituacao(int codSituacao) {
+        for (SituacaoSaidaEnum codigo : SituacaoSaidaEnum.values()) {
+            if (codigo.codSituacao == codSituacao) {
+                return codigo.getCodSituacao();
+            }
+        }
+        throw new ErroDeNegocio("Código de solicitação inválido.");
     }
 }

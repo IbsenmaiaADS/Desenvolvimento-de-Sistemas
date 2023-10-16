@@ -2,16 +2,13 @@ package com.controletotal.controletotal.controller;
 
 import com.controletotal.controletotal.dto.ItemDto;
 import com.controletotal.controletotal.entity.Item;
-import com.controletotal.controletotal.entity.SaidaItem;
 import com.controletotal.controletotal.service.ItemService;
-import com.controletotal.controletotal.service.SaidaItemService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -32,11 +29,10 @@ import java.util.List;
 @Validated
 @RequestMapping("itens")
 @RequiredArgsConstructor
-@Tag(name = "controle-total", description = "Gerenciar itens do estoque")
+@Tag(name = "itens", description = "Gerenciar itens do estoque")
 public class ItemController {
 
     private final ItemService itemService;
-    private final SaidaItemService saidaItemService;
 
     @GetMapping
     @Operation(summary = "Busca todos os itens")
@@ -79,25 +75,5 @@ public class ItemController {
     @ResponseStatus(HttpStatus.OK)
     public void deletarItem(@PathVariable Long id) {
         itemService.deletaItem(id);
-    }
-
-    @PostMapping("/solicitar-item")
-    public ResponseEntity<SaidaItem> solicitarItem(
-            @RequestParam(required = false)
-            @NotNull(message = "Id do item é obrigatório")
-            Long idItem,
-
-            @RequestParam(required = false)
-            @NotNull(message = "Quantidade do item é obrigatório")
-            @Positive(message = "Quantidade em estoque deve ser positivo")
-            @DefaultValue(value = "1")
-            Integer quantidade
-    ) {
-        return ResponseEntity.ok(saidaItemService.solicitarItem(idItem, quantidade));
-    }
-
-    @GetMapping("/aguardando-aprovacao")
-    public ResponseEntity<List<SaidaItem>> buscarItensAguardandoAprovacao() {
-        return ResponseEntity.ok(saidaItemService.buscarItensAguardandoAprovacao());
     }
 }
