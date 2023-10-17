@@ -49,6 +49,7 @@ public class FornecedorController {
         return ResponseEntity.ok(fornecedorService.cadastraFornecedor(fornecedorDto));
     }
 
+
     @PatchMapping("/atualizar")
     @Operation(summary = "Edita fornecedores")
     public ResponseEntity<Fornecedor> atualizarFornecedor(
