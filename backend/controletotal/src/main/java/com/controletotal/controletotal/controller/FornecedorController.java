@@ -18,7 +18,7 @@ import java.util.List;
 @Validated
 @RequestMapping("fornecedores")
 @RequiredArgsConstructor
-@Tag(name = "controle-total", description = "Gerenciar fornecedores")
+@Tag(name = "fornecedores", description = "Gerenciar fornecedores")
 public class FornecedorController {
 
     private final FornecedorService fornecedorService;
