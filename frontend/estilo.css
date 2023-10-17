@@ -1,0 +1,37 @@
+:root {
+  --primaria: #606fa4;
+  --secundaria: #ccc5dd;
+  --texto: #1d1a11;
+  --fundo: #fbfbf9;
+  --destaque: #4e7888;
+}
+
+body {
+  background-color: var(--fundo);
+  color: var(--texto);
+}
+
+h1 {
+  color: var(--primaria);
+}
+
+p {
+  color: var(--texto);
+}
+
+.centro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  width: 100%;
+}
+
+.centro .home {
+  text-align: center;
+}
+
+.btn {
+  background-color: var(--destaque);
+}
