@@ -23,12 +23,6 @@ import java.util.List;
 public class FornecedorController {
     private final FornecedorService fornecedorService;
 
-    @GetMapping("teste")
-    @Operation(summary = "Valida se a API foi inicializada com sucesso.")
-    public String teste() {
-        return "Estou funcionando!";
-    }
-
     @GetMapping
     @Operation(summary = "Busca todos os fornecedores")
     public ResponseEntity<List<Fornecedor>> buscarTodosOsFornecedores() {
