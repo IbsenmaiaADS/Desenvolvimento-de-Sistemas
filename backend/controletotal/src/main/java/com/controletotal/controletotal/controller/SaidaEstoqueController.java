@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -14,6 +15,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.bind.DefaultValue;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -77,8 +79,8 @@ public class SaidaEstoqueController {
             @RequestParam(required = false)
             @NotNull(message = "Status da solicitação é obrigatório")
             @Schema(allowableValues = {"1", "2"})
-            @Min(value = 1)
-            @Max(value = 2)
+            @Min(value = 1, message = "Situação deve ser 1 ou 2")
+            @Max(value = 2, message = "Situação deve ser 1 ou 2")
             Integer situacaoSaida,
 
             @RequestParam(required = false)
@@ -91,7 +93,6 @@ public class SaidaEstoqueController {
             @DateTimeFormat(pattern = "yyyy-MM-dd")
             LocalDate dataFinal
     ) throws DocumentException {
-        //ajustar mensagem de erro
         ByteArrayOutputStream pdfStream = saidaItemService.gerarRelatorioPDF(situacaoSaida, dataInicial, dataFinal);
 
         HttpHeaders headers = new HttpHeaders();
