@@ -1,13 +1,11 @@
 package com.controletotal.controletotal.controller;
 
+import com.controletotal.controletotal.dto.pdf.PdfDto;
 import com.controletotal.controletotal.entity.SaidaItem;
 import com.controletotal.controletotal.service.SaidaItemService;
 import com.itextpdf.text.DocumentException;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -18,13 +16,17 @@ import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.io.ByteArrayOutputStream;
+import java.io.ByteArrayInputStream;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -74,8 +76,8 @@ public class SaidaEstoqueController {
     }
 
     @GetMapping("/gerar-relatorio-pdf")
-    @Operation(summary = "Gerar um relatório em PDF")
-    public ResponseEntity<byte[]> gerarRelatorioDeSaidas(
+    @Operation(summary = "Gerar relatório de saídas em PDF")
+    ResponseEntity<InputStreamResource> gerarRelatorioDeSaidas(
             @RequestParam(required = false)
             @NotNull(message = "Status da solicitação é obrigatório")
             @Schema(allowableValues = {"1", "2"})
@@ -93,13 +95,21 @@ public class SaidaEstoqueController {
             @DateTimeFormat(pattern = "yyyy-MM-dd")
             LocalDate dataFinal
     ) throws DocumentException {
-        ByteArrayOutputStream pdfStream = saidaItemService.gerarRelatorioPDF(situacaoSaida, dataInicial, dataFinal);
+        PdfDto pdf = saidaItemService.gerarRelatorioPDF(situacaoSaida, dataInicial, dataFinal);
+        String situacao = situacaoSaida == 1 ? "aprovadas" : "reprovadas";
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.parseMediaType("application/pdf"));
-        headers.setContentDispositionFormData("relatorio.pdf", "relatorio.pdf");
-        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+        return prepareResponseDataWithHeaders(situacao, pdf);
+    }
 
-        return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
+    private ResponseEntity<InputStreamResource> prepareResponseDataWithHeaders(String situacao, PdfDto pdf) {
+        var responseHeaders = new HttpHeaders();
+        responseHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment; filename=relatorio_saidas_%s.pdf", situacao));
+        responseHeaders.add("Access-Control-Expose-Headers", String.format("%s", HttpHeaders.CONTENT_DISPOSITION));
+        responseHeaders.add(HttpHeaders.CONTENT_LENGTH, String.valueOf(pdf.getPdfBinaryData().length));
+
+        return ResponseEntity.ok()
+                .headers(responseHeaders)
+                .body(new InputStreamResource(new ByteArrayInputStream(pdf.getPdfBinaryData())));
     }
 }

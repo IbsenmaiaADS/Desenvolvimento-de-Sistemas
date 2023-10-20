@@ -1,11 +1,18 @@
 package com.controletotal.controletotal.service;
 
-import com.controletotal.controletotal.dto.SaidaItemResponseDto;
+import com.controletotal.controletotal.dto.pdf.PdfDto;
+import com.controletotal.controletotal.dto.pdf.SaidaItemResponseDto;
 import com.controletotal.controletotal.entity.Item;
 import com.controletotal.controletotal.entity.SaidaItem;
 import com.controletotal.controletotal.handler.ErroDeNegocio;
 import com.controletotal.controletotal.repository.SaidaItemRepository;
-import com.itextpdf.text.*;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.LineSeparator;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +24,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.controletotal.controletotal.dto.SaidaItemResponseDto.toSaidaItemResponseDto;
-import static com.controletotal.controletotal.enums.SituacaoSaidaEnum.*;
+import static com.controletotal.controletotal.dto.pdf.SaidaItemResponseDto.toSaidaItemResponseDto;
+import static com.controletotal.controletotal.enums.SituacaoSaidaEnum.AGUARDANDO_APROVACAO;
+import static com.controletotal.controletotal.enums.SituacaoSaidaEnum.APROVADA;
+import static com.controletotal.controletotal.enums.SituacaoSaidaEnum.REPROVADA;
+import static com.controletotal.controletotal.enums.SituacaoSaidaEnum.getByCodSituacao;
 
 @Service
 @RequiredArgsConstructor
@@ -65,7 +75,7 @@ public class SaidaItemService {
         }
 
         throw new ErroDeNegocio("A solicitação " + solicitacaoSaida.getId() +
-                " já se encontra " + (solicitacaoSaida.getSituacaoSaida() == 1 ? "aprovada" : "reprovada"));
+                                " já se encontra " + (solicitacaoSaida.getSituacaoSaida() == 1 ? "aprovada" : "reprovada"));
     }
 
     public SaidaItem reprovarSaidaDeEstoque(Long idSaida) {
@@ -80,10 +90,10 @@ public class SaidaItemService {
         }
 
         throw new ErroDeNegocio("A solicitação " + solicitacaoSaida.getId() +
-                " já se encontra " + (solicitacaoSaida.getSituacaoSaida() == 1 ? "aprovada" : "reprovada"));
+                                " já se encontra " + (solicitacaoSaida.getSituacaoSaida() == 1 ? "aprovada" : "reprovada"));
     }
 
-    public ByteArrayOutputStream gerarRelatorioPDF(Integer situacaoSaida, LocalDate dataInicial, LocalDate dataFinal) throws DocumentException {
+    public PdfDto gerarRelatorioPDF(Integer situacaoSaida, LocalDate dataInicial, LocalDate dataFinal) throws DocumentException {
         List<SaidaItem> relatorio;
         List<SaidaItemResponseDto> relatorioResonse = new ArrayList<>();
         if (dataInicial.isAfter(dataFinal)) {
@@ -95,7 +105,7 @@ public class SaidaItemService {
             relatorioResonse.add(toSaidaItemResponseDto(saidaItem));
         }
 
-        return gerarRelatorioPDF(relatorioResonse, situacaoSaida, dataInicial, dataFinal);
+        return new PdfDto(gerarRelatorioPDF(relatorioResonse, situacaoSaida, dataInicial, dataFinal).toByteArray());
     }
 
     public ByteArrayOutputStream gerarRelatorioPDF(List<SaidaItemResponseDto> relatorioResponse, Integer situacaoSaida, LocalDate dataInicial, LocalDate dataFinal) throws DocumentException, DocumentException {
@@ -117,8 +127,8 @@ public class SaidaItemService {
 
         String situacao = situacaoSaida == 1 ? "Saída aprovadas " : "Saídas reprovadas ";
         situacao += "no período de "
-                + dataInicial.getDayOfMonth() + "/" + dataInicial.getMonthValue() + "/" + dataInicial.getYear() + " a "
-                + dataFinal.getDayOfMonth() + "/" + dataFinal.getMonthValue() + "/" + dataFinal.getYear() + ":";
+                    + dataInicial.getDayOfMonth() + "/" + dataInicial.getMonthValue() + "/" + dataInicial.getYear() + " a "
+                    + dataFinal.getDayOfMonth() + "/" + dataFinal.getMonthValue() + "/" + dataFinal.getYear() + ":";
         document.add(new Paragraph(situacao, new Font(Font.FontFamily.HELVETICA, 13, Font.BOLD)));
 
         for (SaidaItemResponseDto dto : relatorioResponse) {

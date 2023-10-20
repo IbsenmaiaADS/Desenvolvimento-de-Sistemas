@@ -39,3 +39,5 @@ J
 bcontroletotal/src/main/java/com/controletotal/controletotal/controller/SaidaEstoqueController.java,8\0\80bc082554cc6a1d9bffdb2e5b55b2f71ce05754
 ‰
 Ycontroletotal/src/main/java/com/controletotal/controletotal/service/SaidaItemService.java,d\1\d10ac5b1e10c89e81b7de3180700065453908cf0
+ˆ
+Xcontroletotal/src/main/java/com/controletotal/controletotal/enums/SituacaoSaidaEnum.java,4\3\431f106265f29e6d229d3c0729b060f55faf61d7

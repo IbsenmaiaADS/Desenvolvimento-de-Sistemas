@@ -1,4 +1,4 @@
-package com.controletotal.controletotal.dto;
+package com.controletotal.controletotal.dto.pdf;
 
 import com.controletotal.controletotal.entity.SaidaItem;
 import lombok.*;
