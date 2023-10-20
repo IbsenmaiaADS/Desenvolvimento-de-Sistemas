@@ -1,9 +1,12 @@
 package com.controletotal.controletotal.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,4 +25,8 @@ public class Fornecedor {
 
     @Column(name = "nu_telefone")
     private String numTelefone;
+
+    @OneToMany(mappedBy = "fornecedor", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private List<ItemFornecedor> itensFornecidos;
 }

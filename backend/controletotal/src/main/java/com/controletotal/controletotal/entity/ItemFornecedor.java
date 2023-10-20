@@ -1,11 +1,6 @@
 package com.controletotal.controletotal.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -13,11 +8,15 @@ import lombok.Data;
 @Table(name = "tb_item_fornecedor", schema = "controletotal")
 public class ItemFornecedor {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SEQ_ITEM_FORNECEDOR")
+    @SequenceGenerator(sequenceName = "SEQ_ITEM_FORNECEDOR_OID", allocationSize = 1, name = "SEQ_ITEM_FORNECEDOR")
+    @Column(name = "id_item_fornecedor")
+    private Long id;
+
     @ManyToOne
     @JoinColumn(name = "id_fornecedor", referencedColumnName = "id_fornecedor")
     private Fornecedor fornecedor;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "id_item", referencedColumnName = "id_item")
     private Item item;
