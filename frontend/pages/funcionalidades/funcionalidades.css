@@ -1,8 +1,8 @@
 :root {
   --primaria: #606fa4;
-  --secundaria: #ccc5dd;
+  --secundaria: #56407e;
   --texto: #1d1a11;
-  --fundo: #fbfbf9;
+  --fundo: rgba(118, 161, 234, 0.73);
   --destaque: #4e7888;
 }
 
@@ -26,7 +26,7 @@ body{
 }
 .flex-container{
   display: flex;
-  background-color: #7f8eadbb;
+  background-color: rgba(118, 161, 234, 0.73);
   border-bottom: #1d1a11; 
   border-color: black;
   border-radius: 12px;
@@ -35,7 +35,7 @@ body{
   border-radius: 12px;
   border-style:initial;
   max-width: 1280px;
-  text-align:var(--destaque);
+  text-align:justify;
   margin: auto;
   width: 100%;
   min-width: 320px;
@@ -43,7 +43,7 @@ body{
   justify-content: space-between;
 }
 
-header{
+/*header{
   background-color: #fff;
   max-width: 1280px;
   margin: auto;
@@ -196,7 +196,7 @@ footer{
   margin-left: 16%;
   width: 100%;
 }
-
+*/
 
 /*mobile*/
 @media(max-width: 992px){
