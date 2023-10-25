@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,20 +9,56 @@
     />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     <link rel="stylesheet" type="text/css" href="./estilo.css" />
     <link rel="stylesheet" type="text/css" href="./login.css" />
+    <a href="index.html">Home</a>
 </head>
 <body>
-<h2>LOGIN</h2>
-<form action="processar_login.php" method="post">
-    <label for="username">Usuário:</label>
-    <input type="text" id="username" name="username" required><br><br>
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+                LOGIN
+            </h5>
+            <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+            >
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class = "flex-container m-5"></div>
+        <form action="processar_login.php" method="post">
+            <label for="username">Usuário:</label>
+            <input type="text" id="username" name="username" required><br><br>
 
-    <label for="password">Senha:</label>
-    <input type="password" id="password" name="password" required><br><br>
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" required><br><br>
 
-    <input type="submit" value="Entrar">
+            <div class="row" id="items-container"></div>
+            <div class="modal-footer">
+
+                </button>
+                <button type="button" class="btn btn-primary" id="cadastrarBtn">
+                    Entrar
+                </button>
+
+                <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal">
+                        Cancelar
+                </button>
+
+
+            </div>
+        </form>
+    </div>
+</div>
+
 </form>
 </body>
+
 </html>
