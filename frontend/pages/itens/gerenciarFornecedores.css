@@ -1,0 +1,17 @@
+:root {
+    --primaria: #606fa4;
+    --secundaria: #ccc5dd;
+    --texto: #1d1a11;
+    --fundo: #fbfbf9;
+    --destaque: #4e7888;
+}
+
+.card-title {
+    color: var(--destaque);
+}
+
+#openModalBtn {
+    margin-bottom: 5%;
+    width: 100%;
+    background-color: var(--destaque);
+}
