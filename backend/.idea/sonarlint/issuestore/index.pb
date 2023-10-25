@@ -27,15 +27,11 @@ Zcontroletotal/src/main/java/com/controletotal/controletotal/repository/ItemRepo
 bcontroletotal/src/main/java/com/controletotal/controletotal/controller/SaidaEstoqueController.java,8\0\80bc082554cc6a1d9bffdb2e5b55b2f71ce05754
 ä
 Zcontroletotal/src/main/java/com/controletotal/controletotal/controller/ItemController.java,3\4\3486e486a6faf136e6c89d60b832baee3dd65469
-Ñ
-Tcontroletotal/src/main/java/com/controletotal/controletotal/service/ItemService.java,d\a\daa49d0e842dee26cf4b3928f78b51f1f11e5374
 |
 Lcontroletotal/src/main/java/com/controletotal/controletotal/dto/ItemDto.java,4\b\4b1c3b8e462334a720ffe0e90b9e5fa8926a32aa
 à
 Xcontroletotal/src/main/java/com/controletotal/controletotal/entity/ItemFornecedorId.java,d\6\d62cd2565c25e10c4167731a7a5419ccc20f6c62
 |
 Lcontroletotal/src/main/java/com/controletotal/controletotal/entity/Item.java,b\e\bec49bf2b835395f2dd7ab61f6b85ce461176444
-Ç
-Rcontroletotal/src/main/java/com/controletotal/controletotal/entity/Fornecedor.java,2\2\2297bdbde99cce51649b63b5470c0a9c6d413c5d
 ç
 ]controletotal/src/main/java/com/controletotal/controletotal/dto/pdf/SaidaItemResponseDto.java,1\a\1a3bde4bba9eacad9c9e9e0784cbb0127f671040

@@ -54,11 +54,11 @@ public class FornecedorService {
             throw new ErroDeNegocio("Já existe um fornecedor com o mesmo nome");
         }
 
-        if(nome != null) {
+        if (nome != null) {
             fornecedor.setNome(nome);
         }
 
-        if(numTelefone != null) {
+        if (numTelefone != null) {
             fornecedor.setNumTelefone(numTelefone);
         }
         return fornecedorRepository.save(fornecedor);
@@ -70,9 +70,9 @@ public class FornecedorService {
 
     public List<ItensFornecedorDto> buscarItens(Long id) {
         List<ItensFornecedorDto> itens = new ArrayList<>();
-        itemFornecedorRepository.findByFornecedor(id).forEach(
-                itemFornecedor -> itens.add(toItensFornecedorDto(itemFornecedor))
-        );
+
+        buscaFornecedor(id, null).getItensFornecidos()
+                .forEach(itemFornecedor -> itens.add(toItensFornecedorDto(itemFornecedor)));
         return itens;
     }
 
