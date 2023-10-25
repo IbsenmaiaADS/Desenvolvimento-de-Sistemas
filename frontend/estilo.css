@@ -2,8 +2,11 @@
   --primaria: #606fa4;
   --secundaria: #ccc5dd;
   --texto: #1d1a11;
-  --fundo: #fbfbf9;
+  --fundo: #e1e15b;
   --destaque: #4e7888;
+}
+body{
+  background-image: url(https://mapa-da-obra-producao.s3.amazonaws.com/wp-content/uploads/2022/09/iStock-1138429558-1536x1025.jpg);
 }
 
 body {
