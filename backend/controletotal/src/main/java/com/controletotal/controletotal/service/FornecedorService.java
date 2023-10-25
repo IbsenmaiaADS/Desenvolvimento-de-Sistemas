@@ -39,17 +39,21 @@ public class FornecedorService {
         return fornecedorRepository.save(fornecedor);
     }
 
-    public Fornecedor atualizaFornecedor(Long id, FornecedorDto fornecedorDto) {
+    public Fornecedor atualizaFornecedor(Long id, String nome, String numTelefone) {
         Fornecedor fornecedor = fornecedorRepository.findById(id)
                 .orElseThrow(() -> new ErroDeNegocio("Fornecedor não encontrado com o ID: " + id));
 
-        if (!fornecedor.getNome().equals(fornecedorDto.getNome()) && fornecedorRepository.findByNomeIgnoreCase(fornecedorDto.getNome()).isPresent()) {
+        if (fornecedor.getNome().equals(nome) && fornecedorRepository.findByNomeIgnoreCase(nome).isPresent()) {
             throw new ErroDeNegocio("Já existe um fornecedor com o mesmo nome");
         }
 
-        fornecedor.setNome(fornecedorDto.getNome());
-        fornecedor.setNumTelefone(fornecedorDto.getNumTelefone());
+        if(nome != null) {
+            fornecedor.setNome(nome);
+        }
 
+        if(numTelefone != null) {
+            fornecedor.setNumTelefone(numTelefone);
+        }
         return fornecedorRepository.save(fornecedor);
     }
 
