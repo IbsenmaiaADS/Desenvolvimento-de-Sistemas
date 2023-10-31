@@ -16,7 +16,10 @@ public class ItemDto {
     @NotBlank(message = "Nome do item é obrigatório")
     private String nome;
 
-    @NotNull(message = "Quantidade em estoque é obrigatório")
-    @Positive(message = "Quantidade em estoque deve ser positivo")
-    private Integer quantidadeEstoque;
+    @NotNull(message = "Fornecedor do item é obrigatório")
+    private Long idFornecedor;
+
+    @Positive(message = "Valor do item deve ser positivo")
+    @NotNull(message = "Valor do item é obrigatório")
+    private Double valor;
 }
