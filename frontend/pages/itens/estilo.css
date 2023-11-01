@@ -5,6 +5,17 @@
   --fundo: #e1e15b;
   --destaque: #4e7888;
 }
+
+.overlay-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
 body{
   background-image: url(https://mapa-da-obra-producao.s3.amazonaws.com/wp-content/uploads/2022/09/iStock-1138429558-1536x1025.jpg);
 }
@@ -12,6 +23,7 @@ body{
 body {
   background-color: var(--fundo);
   color: var(--texto);
+  text-align: initial;
 }
 
 h1 {
@@ -30,6 +42,7 @@ a{
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
   height: 100vh;
   margin: 0;
   width: 100%;
@@ -37,6 +50,7 @@ a{
 
 .centro .home {
   text-align: center;
+  position: absolute;
 }
 
 .btn {
