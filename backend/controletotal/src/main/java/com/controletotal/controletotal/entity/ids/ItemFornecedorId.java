@@ -1,4 +1,4 @@
-package com.controletotal.controletotal.entity;
+package com.controletotal.controletotal.entity.ids;
 
 import jakarta.persistence.Embeddable;
 import lombok.EqualsAndHashCode;
