@@ -13,18 +13,18 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
 
 
-    public Usuario buscaUsuario(Long id, String email) {
+    public Usuario buscaUsuario(Long id, String nome) {
         if (id != null) {
             return usuarioRepository.findById(id).orElseThrow(() -> new ErroDeNegocio("Usuário não encontrado com o ID: " + id));
-        } else if (email != null) {
-            return usuarioRepository.findByEmailIgnoreCase(email).orElseThrow(() -> new ErroDeNegocio("Usuário não encontrado com o email: " + email));
+        } else if (nome != null) {
+            return usuarioRepository.findByNomeIgnoreCase(nome).orElseThrow(() -> new ErroDeNegocio("Usuário não encontrado com o nome: " + nome));
         }
         throw new ErroDeNegocio("Usuario não encontrado");
     }
 
     public Usuario cadastraUsuario(UsuarioDto usuarioDto) {
-        if (usuarioRepository.findByEmailIgnoreCase(usuarioDto.getEmail()).isPresent()) {
-            throw new ErroDeNegocio("Já existe um usuario com este e-mail");
+        if (usuarioRepository.findByEmailIgnoreCase(usuarioDto.getNome()) != null) {
+            throw new ErroDeNegocio("Já existe um usuario com este nome");
         }
 
         Usuario usuario = new Usuario();
@@ -44,7 +44,7 @@ public class UsuarioService {
             usuario.setNome(nome);
         }
 
-        if (usuario.getEmail().equals(email) && usuarioRepository.findByEmailIgnoreCase(email).isPresent()) {
+        if (usuario.getEmail().equals(email) && (usuarioRepository.findByEmailIgnoreCase(email) != null)) {
             throw new ErroDeNegocio("Já existe um usuário com o mesmo email");
         }
 
