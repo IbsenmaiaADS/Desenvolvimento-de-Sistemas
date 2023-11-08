@@ -1,6 +1,7 @@
 
 package com.controletotal.controletotal.dto;
 
+import com.controletotal.controletotal.enums.TipoUsuario;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,6 +24,6 @@ public class UsuarioDto {
     private String senha;
 
     @NotBlank(message = "O tipo do usuário é obrigatório")
-    private Integer tipo;
+    private TipoUsuario tipo;
 
 }

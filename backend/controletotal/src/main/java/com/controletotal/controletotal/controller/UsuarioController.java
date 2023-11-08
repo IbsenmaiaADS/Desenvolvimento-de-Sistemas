@@ -2,7 +2,7 @@ package com.controletotal.controletotal.controller;
 
 import com.controletotal.controletotal.dto.UsuarioDto;
 import com.controletotal.controletotal.entity.Usuario;
-import com.controletotal.controletotal.service.AutenticacaoService;
+import com.controletotal.controletotal.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Tag(name = "usuario", description = "Gerenciar usuarios")
 public class UsuarioController {
-    private final AutenticacaoService autenticacaoService;
+    private final UsuarioService usuarioService;
 
     @GetMapping("/buscar")
     @Operation(summary = "Buscar um usuario")
