@@ -19,10 +19,10 @@ public class UsuarioDto {
     @NotBlank(message = "Um e-mail é obrigatório")
     private String email;
     
-    @NotBlank(message = "Senha é obrigatório")
+    @NotNull(message = "Senha é obrigatório")
     private String senha;
 
-    @NotBlank(message = "O tipo do usuário é obrigatório")
+    @NotNull(message = "O tipo do usuário é obrigatório")
     private Integer tipo;
 
 }

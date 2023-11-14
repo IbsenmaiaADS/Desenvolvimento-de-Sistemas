@@ -5,7 +5,10 @@ import com.controletotal.controletotal.entity.Usuario;
 import com.controletotal.controletotal.handler.ErroDeNegocio;
 import com.controletotal.controletotal.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import org.springframework.stereotype.Service;
+
 
 @Service
 @RequiredArgsConstructor
@@ -29,7 +32,10 @@ public class UsuarioService {
         Usuario usuario = new Usuario();
         usuario.setNome(usuarioDto.getNome());
         usuario.setEmail(usuarioDto.getEmail());
-        usuario.setSenha(usuarioDto.getSenha());
+
+        String senhaCriptografada = criptografarMD5(usuarioDto.getSenha());
+        usuario.setSenha(senhaCriptografada);
+
         usuario.setTipo(usuarioDto.getTipo());
 
         return usuarioRepository.save(usuario);
@@ -62,3 +68,17 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
     }
 }
+
+    private String criptografarMD5(String senha) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] array = md.digest(senha.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : array) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Erro ao criptografar a senha", e);
+        }
+    }
