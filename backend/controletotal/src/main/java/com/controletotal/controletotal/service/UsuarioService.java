@@ -4,8 +4,13 @@ import com.controletotal.controletotal.dto.UsuarioDto;
 import com.controletotal.controletotal.entity.Usuario;
 import com.controletotal.controletotal.handler.ErroDeNegocio;
 import com.controletotal.controletotal.repository.UsuarioRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 @RequiredArgsConstructor
@@ -22,19 +27,19 @@ public class UsuarioService {
         throw new ErroDeNegocio("Usuario não encontrado");
     }
 
-    public Usuario cadastraUsuario(UsuarioDto usuarioDto) {
-        if (usuarioRepository.findByEmailIgnoreCase(usuarioDto.getNome()) != null) {
-            throw new ErroDeNegocio("Já existe um usuario com este nome");
-        }
-
-        Usuario usuario = new Usuario();
-        usuario.setNome(usuarioDto.getNome());
-        usuario.setEmail(usuarioDto.getEmail());
-        usuario.setSenha(usuarioDto.getSenha());
-        usuario.setTipo(usuarioDto.getTipo());
-
-        return usuarioRepository.save(usuario);
-    }
+//    public Usuario cadastraUsuario(UsuarioDto usuarioDto) {
+//        if (usuarioRepository.findByEmailIgnoreCase(usuarioDto.getNome()) != null) {
+//            throw new ErroDeNegocio("Já existe um usuario com este nome");
+//        }
+//
+//        Usuario usuario = new Usuario();
+//        usuario.setNome(usuarioDto.getNome());
+//        usuario.setEmail(usuarioDto.getEmail());
+//        usuario.setSenha(usuarioDto.getSenha());
+//        usuario.setTipo(usuarioDto.getTipo());
+//
+//        return usuarioRepository.save(usuario);
+//    }
 
     public Usuario atualizaUsuario(Long id, String email, String nome, String senha) {
         Usuario usuario = usuarioRepository.findById(id)

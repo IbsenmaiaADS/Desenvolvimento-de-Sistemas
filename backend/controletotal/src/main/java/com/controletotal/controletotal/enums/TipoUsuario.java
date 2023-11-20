@@ -1,17 +1,8 @@
 package com.controletotal.controletotal.enums;
 
 public enum TipoUsuario {
-    ADMIN("admin"),
-    ALMOXARIFE("almoxarife"),
-    VISITANTE("visitante");
+    ADMIN,
+    ALMOXARIFE,
+    VISITANTE
 
-    private String tipo;
-
-    TipoUsuario(String tipo) {
-        this.tipo = tipo;
-    }
-
-    String getTipo() {
-        return tipo;
-    }
 }

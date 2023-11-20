@@ -21,22 +21,24 @@ import org.springframework.web.bind.annotation.*;
 public class UsuarioController {
     private final UsuarioService usuarioService;
 
-    @GetMapping("/buscar")
+    @GetMapping("/buscar/{id}/{email}")
     @Operation(summary = "Buscar um usuario")
     public ResponseEntity<Usuario> buscarUsuario(
-            @RequestParam(required = false)
+            @PathVariable(required = false)
             Long id,
-            @RequestParam(required = false)
+            @PathVariable(required = false)
             String email
     ) {
         return ResponseEntity.ok(usuarioService.buscaUsuario(id, email));
     }
 
-    @PostMapping("/cadastrar")
-    @Operation(summary = "Cadastra usuario")
-    public ResponseEntity<Usuario> cadastrarUsuario(@Valid @RequestBody UsuarioDto usuarioDto) {
-        return ResponseEntity.ok(usuarioService.cadastraUsuario(usuarioDto));
-    }
+
+//
+//    @PostMapping("/cadastrar")
+//    @Operation(summary = "Cadastra usuario")
+//    public ResponseEntity<Usuario> cadastrarUsuario(@Valid @RequestBody UsuarioDto usuarioDto) {
+//        return ResponseEntity.ok(.cadastraUsuario(usuarioDto));
+//    }
 
 
     @PatchMapping("/atualizar")

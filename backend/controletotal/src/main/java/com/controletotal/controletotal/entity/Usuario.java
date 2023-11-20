@@ -2,10 +2,9 @@ package com.controletotal.controletotal.entity;
 
 import com.controletotal.controletotal.enums.TipoUsuario;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,30 +17,38 @@ import java.util.List;
 @Setter
 @ToString
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "tb_usuario", schema = "controletotal", uniqueConstraints = @UniqueConstraint(columnNames={"id_usuario", "nm_usuario", "email_usuario"}))
 public class Usuario implements UserDetails {
 
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
     private Long id;
 
-    @NotNull
+    @NotBlank
     @Column(name = "nm_usuario")
     private String nome;
 
-    @NotNull
+    @NotBlank
     @Column(name = "email_usuario")
     private String email;
 
-    @NotNull
+    @NotBlank
     @Column(name = "senha_usuario")
     private String senha;
 
-    @NotNull
+    @NotBlank
     @Column(name = "tipo_usuario")
     private TipoUsuario tipo;
+
+    public Usuario(String nome, String login, String senha, TipoUsuario tipo){
+        this.nome = nome;
+        this.email = login;
+        this.senha = senha;
+        this.tipo = tipo;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
