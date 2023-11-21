@@ -1,11 +1,12 @@
 package com.controletotal.controletotal.entity;
 
 import com.controletotal.controletotal.enums.TipoUsuario;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +20,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"getAuthorities()", "getPassword()"})
 @Table(name = "tb_usuario", schema = "controletotal", uniqueConstraints = @UniqueConstraint(columnNames={"id_usuario", "nm_usuario", "email_usuario"}))
 public class Usuario implements UserDetails {
 
@@ -36,10 +38,10 @@ public class Usuario implements UserDetails {
     private String email;
 
     @NotBlank
+    @JsonIgnore
     @Column(name = "senha_usuario")
     private String senha;
 
-    @NotBlank
     @Column(name = "tipo_usuario")
     private TipoUsuario tipo;
 
@@ -51,6 +53,7 @@ public class Usuario implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if(tipo.equals(TipoUsuario.ADMIN)) {
             return List.of(new SimpleGrantedAuthority("ADMIN"),
@@ -63,32 +66,44 @@ public class Usuario implements UserDetails {
         }
     }
 
+    @Nullable
     @Override
+    @JsonIgnore
     public String getPassword() {
         return senha;
     }
 
+    @Nullable
     @Override
+    @JsonIgnore
     public String getUsername() {
         return email;
     }
 
+    @Nullable
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    @Nullable
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    @Nullable
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    @Nullable
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return true;
     }

@@ -21,6 +21,7 @@ public class SecurityConfigurations {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+
         return  httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -28,6 +29,10 @@ public class SecurityConfigurations {
                         ((authorize) -> authorize
                         .requestMatchers("/auth/login").permitAll()
                         .requestMatchers("/auth/cadastrar").permitAll()
+                        .requestMatchers("/swagger-ui/index.html").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/v3/api-docs/**").permitAll()
+//TODO: Adicionar os endpoints permitidos pra cada role
 //                        .requestMatchers("/usuario/cadastrar").permitAll()
 //                        .requestMatchers(HttpMethod.POST, "/usuario/atualizar").hasRole("ADMIN")
 //                        .requestMatchers(HttpMethod.POST, "/usuario/deletar/{id}").hasRole("ADMIN")
