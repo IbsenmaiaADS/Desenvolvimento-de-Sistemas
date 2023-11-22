@@ -3,10 +3,13 @@ package com.controletotal.controletotal.infra.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,19 +26,22 @@ public class SecurityConfigurations {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
         return  httpSecurity
-                .csrf(csrf -> csrf.disable())
+                .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests
                         ((authorize) -> authorize
-                        .requestMatchers("/auth/login").permitAll()
-                        .requestMatchers("/auth/cadastrar").permitAll()
                         .requestMatchers("/swagger-ui/index.html").permitAll()
                         .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/v3/api-docs/**").permitAll()
-//TODO: Adicionar os endpoints permitidos pra cada role
-//                        .requestMatchers("/usuario/cadastrar").permitAll()
-//                        .requestMatchers(HttpMethod.POST, "/usuario/atualizar").hasRole("ADMIN")
-//                        .requestMatchers(HttpMethod.POST, "/usuario/deletar/{id}").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
+
+                        .requestMatchers("/usuario/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST,"/auth/cadastrar").hasRole("ADMIN")
+                        .requestMatchers("/saida-estoque/**").hasAnyRole("ADMIN", "ALMOXARIFE")
+                        .requestMatchers("/itens/**").hasAnyRole("ADMIN", "ALMOXARIFE")
+                        .requestMatchers("/fornecedores/**").hasAnyRole("ADMIN", "ALMOXARIFE")
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

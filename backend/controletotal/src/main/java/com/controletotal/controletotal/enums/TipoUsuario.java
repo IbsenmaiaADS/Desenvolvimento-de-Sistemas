@@ -3,6 +3,6 @@ package com.controletotal.controletotal.enums;
 public enum TipoUsuario {
     ADMIN,
     ALMOXARIFE,
-    VISITANTE
+    USUARIO
 
 }

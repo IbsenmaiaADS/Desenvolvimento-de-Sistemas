@@ -20,7 +20,6 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({"getAuthorities()", "getPassword()"})
 @Table(name = "tb_usuario", schema = "controletotal", uniqueConstraints = @UniqueConstraint(columnNames={"id_usuario", "nm_usuario", "email_usuario"}))
 public class Usuario implements UserDetails {
 
@@ -56,13 +55,14 @@ public class Usuario implements UserDetails {
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if(tipo.equals(TipoUsuario.ADMIN)) {
-            return List.of(new SimpleGrantedAuthority("ADMIN"),
-                    new SimpleGrantedAuthority("ALMOXARIFE"),
-                    new SimpleGrantedAuthority("VISITANTE"));
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"),
+                    new SimpleGrantedAuthority("ROLE_ALMOXARIFE"),
+                    new SimpleGrantedAuthority("ROLE_USUARIO"));
         } else if(tipo.equals(TipoUsuario.ALMOXARIFE)) {
-            return List.of(new SimpleGrantedAuthority("ALMOXARIFE"));
+            return List.of(new SimpleGrantedAuthority("ROLE_ALMOXARIFE"),
+                    new SimpleGrantedAuthority("ROLE_USUARIO"));
         } else {
-            return List.of(new SimpleGrantedAuthority("VISITANTE"));
+            return List.of(new SimpleGrantedAuthority("ROLE_USUARIO"));
         }
     }
 

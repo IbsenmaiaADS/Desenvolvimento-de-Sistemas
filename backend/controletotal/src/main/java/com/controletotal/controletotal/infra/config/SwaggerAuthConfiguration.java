@@ -19,9 +19,10 @@ public class SwaggerAuthConfiguration {
     @Bean
     public OpenAPI openAPI() {
         return new OpenAPI().addSecurityItem(new SecurityRequirement().
-                        addList("Bearer Authentication"))
+                        addList("BearerAuthentication"))
                 .components(new Components().addSecuritySchemes
-                        ("Bearer Authentication", createAPIKeyScheme()))
-                .info(new Info().title("Controle Total"));
+                        ("BearerAuthentication", createAPIKeyScheme()))
+                .info(new Info().title("ControleTotal")
+                        .version("1.0"));
     }
 }
