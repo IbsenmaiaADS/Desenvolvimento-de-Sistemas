@@ -39,7 +39,9 @@ public class SecurityConfigurations {
                         .requestMatchers("/usuario/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST,"/auth/cadastrar").hasRole("ADMIN")
                         .requestMatchers("/saida-estoque/**").hasAnyRole("ADMIN", "ALMOXARIFE")
-                        .requestMatchers("/itens/**").hasAnyRole("ADMIN", "ALMOXARIFE")
+                        .requestMatchers("/itens/cadastrar").hasAnyRole("ADMIN", "ALMOXARIFE")
+                        .requestMatchers("/itens/atualizar").hasAnyRole("ADMIN", "ALMOXARIFE")
+                        .requestMatchers("/itens/deletar/**").hasAnyRole("ADMIN", "ALMOXARIFE")
                         .requestMatchers("/fornecedores/**").hasAnyRole("ADMIN", "ALMOXARIFE")
 
                         .anyRequest().authenticated()
