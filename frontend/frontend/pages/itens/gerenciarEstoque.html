@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="./estilo.css" />
+    <link rel="stylesheet" type="text/css" href="./gerenciarEstoque.css" />
+    <title>Controle Total</title>
+    <a href="index.html">Home</a>
+</head>
+<body>
+<div class="container mt-5">
+    <button
+            id="openModalBtn"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#cadastrarModal"
+    >
+        Gerenciador de Estoque
+        <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="30"
+                fill="currentColor"
+                class="bi bi-node-plus"
+                viewBox="0 0 16 16"
+        >
+            <path
+                    fill-rule="evenodd"
+                    d="M11 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM6.025 7.5a5 5 0 1 1 0 1H4A1.5 1.5 0 0 1 2.5 10h-1A1.5 1.5 0 0 1 0 8.5v-1A1.5 1.5 0 0 1 1.5 6h1A1.5 1.5 0 0 1 4 7.5h2.025zM11 5a.5.5 0 0 1 .5.5v2h2a.5.5 0 0 1 0 1h-2v2a.5.5 0 0 1-1 0v-2h-2a.5.5 0 0 1 0-1h2v-2A.5.5 0 0 1 11 5zM1.5 7a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"
+            />
+        </svg>
+    </button>
+
+    <div class="row" id="items-container"></div>
+</div>
+<!-- Modal Gerar Relatorio-->
+<div
+        class="modal fade"
+        id="cadastrarModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Relatório de Estoque
+                </h5>
+                <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="cadastrarForm">
+                    <div class="form-group">
+                        <label for="nome">Nome ou ID do produto:</label>
+                        <input type="text" class="form-control" id="nome" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="nomeF">Nome ou ID do Fornecedor:</label>
+                        <input
+                        <input type="text" class="form-control" id="nomeF" required />
+                    </div>
+                </form>
+
+                </form>
+            <div class="modal-footer">
+                <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                >
+                    Cancelar
+                </button>
+                <button type="button" class="btn btn-primary" id="cadastrarBtn">
+                    Relatório:
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Gerar Relatório-->
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="./gerenciarEstoque.js"></script>
+</body>
+</html>

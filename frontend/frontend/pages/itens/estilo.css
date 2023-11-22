@@ -1,0 +1,44 @@
+:root {
+  --primaria: #606fa4;
+  --secundaria: #ccc5dd;
+  --texto: #1d1a11;
+  --fundo: #e1e15b;
+  --destaque: #4e7888;
+}
+body{
+  background-image: url(https://mapa-da-obra-producao.s3.amazonaws.com/wp-content/uploads/2022/09/iStock-1138429558-1536x1025.jpg);
+}
+
+body {
+  background-color: var(--fundo);
+  color: var(--texto);
+}
+
+h1 {
+  color: var(--primaria);
+  text-decoration-style: dotted;
+}
+
+p {
+  color: var(--texto);
+}
+a{
+  color: black;
+  container-type: initial;
+}
+.centro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  width: 100%;
+}
+
+.centro .home {
+  text-align: center;
+}
+
+.btn {
+  background-color: var(--destaque);
+}
