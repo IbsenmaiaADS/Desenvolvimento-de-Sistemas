@@ -40,7 +40,7 @@
                         <input class="form-control"
                                id="nomeCompleto"
                                name="nome"
-                               placeholder="Insira o nome completo"
+                               placeholder="Insira o nome completo do colaborador"
                                th:field="*{nome}"
                                type="text"
                         />
@@ -54,7 +54,7 @@
                         <input class="form-control"
                                id="email"
                                name="email"
-                               placeholder="Insira o e-mail com que o usuário acessará a plataforma."
+                               placeholder="Insira o e-mail com que o usuário acessará a plataforma"
                                th:field="*{email}"
                                type="email"
                         />
@@ -67,7 +67,7 @@
                         <input class="form-control"
                                id="password"
                                name="senha"
-                               placeholder="Escolha a senha temporária do usuário. Ele poderá alterá-la depois."
+                               placeholder="Escolha a senha temporária do usuário. Ele poderá alterá-la depois"
                                th:field="*{senha}"
                                type="password"
                         />
@@ -75,20 +75,25 @@
                            th:if="${#fields.hasErrors('senha')}">
                         </p>
                     </div>
+                    <br />
                       <div class="form-floating">
                         <select name="tipo" th:field="*{tipo}" class="form-select" id="floatingSelect">
                           <option value="ADMIN">ADMIN</option>
                           <option value="ALMOXARIFE">ALMOXARIFE</option>
                           <option value="USUARIO">USUARIO</option>
                         </select>
+                        
                         <label for="floatingSelect">Insira o tipo do usuário</label>
+
+                        <p th:errors="*{tipo}" class="text-danger"
+                        th:if="${#fields.hasErrors('tipo')}">
+                     </p>
                       </div>
-                      <p th:errors="*{tipo}" class="text-danger"
-                           th:if="${#fields.hasErrors('tipo')}">
-                        </p>
+                      <br />
                   <div class="mb-3">
                     <button type="submit" class="btn btn-primary">Cadastrar</button>
                 </div>
+                
                 </form>
             </div>
         </div>

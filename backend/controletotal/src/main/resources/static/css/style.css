@@ -1,4 +1,41 @@
 body {
     display: flex;
-    justify-content: center
+    align-items: right;
+
+    height: 100vh;
+}
+
+.login-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    height: 100%;
+    width: 50%;
+
+    background-color: antiquewhite;
+}
+
+.card {
+    max-width: auto;
+    margin: auto;
+}
+
+.card-menu {
+    padding: 10px;
+    max-width: 50%;
+    /* margin: 20px; */
+}
+
+main {
+    margin: 100px auto;
+}
+
+.menu {
+    margin: 100px 200px 100px 200px;
+}
+.menu-titulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
