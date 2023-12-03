@@ -20,7 +20,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tb_usuario", schema = "controletotal", uniqueConstraints = @UniqueConstraint(columnNames={"id_usuario", "nm_usuario", "email_usuario"}))
+@Table(name = "tb_usuario", schema = "controletotal")
 public class Usuario implements UserDetails {
 
     @Id
