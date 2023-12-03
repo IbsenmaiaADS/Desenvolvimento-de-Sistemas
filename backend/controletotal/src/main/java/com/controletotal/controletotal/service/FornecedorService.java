@@ -3,6 +3,8 @@ package com.controletotal.controletotal.service;
 import com.controletotal.controletotal.dto.FornecedorDto;
 import com.controletotal.controletotal.dto.ItensFornecedorDto;
 import com.controletotal.controletotal.entity.Fornecedor;
+import com.controletotal.controletotal.entity.Item;
+import com.controletotal.controletotal.entity.ItemFornecedor;
 import com.controletotal.controletotal.handler.ErroDeNegocio;
 import com.controletotal.controletotal.repository.FornecedorRepository;
 import com.controletotal.controletotal.repository.ItemFornecedorRepository;
@@ -74,6 +76,11 @@ public class FornecedorService {
         buscaFornecedor(id, null).getItensFornecidos()
                 .forEach(itemFornecedor -> itens.add(toItensFornecedorDto(itemFornecedor)));
         return itens;
+    }
+
+    public ItemFornecedor buscaItem(Item item, Fornecedor fornecedor) {
+        return itemFornecedorRepository.findByItemAndFornecedor(item, fornecedor)
+                .orElseThrow(() -> new ErroDeNegocio("Item não encontrado para o fornecedor"));
     }
 
     private void validaBuscaFornecedor(Long id, String nome) {
