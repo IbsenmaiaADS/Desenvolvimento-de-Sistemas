@@ -19,25 +19,28 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfigurations {
-    @Autowired
-    SecurityFilter securityFilter;
+    // @Autowired
+    // SecurityFilter securityFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
         return  httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests
                         ((authorize) -> authorize
                         .requestMatchers("/swagger-ui/index.html").permitAll()
                         .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/v3/api-docs/**").permitAll()
+                        .requestMatchers("/cadastrar.html").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/cadastrar").permitAll()
+                        .requestMatchers("/login.html").permitAll()
+                        .requestMatchers("/images/**", "/css/**", "/templates/**").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/login").permitAll()
 
-                        .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
-
+                        .requestMatchers("/usuario").hasRole("ADMIN")
                         .requestMatchers("/usuario/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST,"/auth/cadastrar").hasRole("ADMIN")
+                        // .requestMatchers(HttpMethod.POST,"/cadastrar").hasRole("ADMIN")
                         .requestMatchers("/saida-estoque/**").hasAnyRole("ADMIN", "ALMOXARIFE")
                         .requestMatchers("/itens/cadastrar").hasAnyRole("ADMIN", "ALMOXARIFE")
                         .requestMatchers("/itens/atualizar").hasAnyRole("ADMIN", "ALMOXARIFE")
@@ -46,7 +49,16 @@ public class SecurityConfigurations {
 
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                .formLogin(form -> form
+                    .loginPage("/login")
+                    .usernameParameter("email")
+                    .passwordParameter("senha")
+                    .defaultSuccessUrl("/")
+                    .permitAll()
+                    // .loginProcessingUrl("/login")
+                    // .defaultSuccessUrl("/swagger-ui/index.html")
+                )
+                // .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 

@@ -20,6 +20,7 @@ import java.util.List;
 @RequestMapping("usuario")
 @RequiredArgsConstructor
 @Tag(name = "usuario", description = "Gerenciar usuarios")
+@CrossOrigin(origins = "*")
 public class UsuarioController {
     private final UsuarioService usuarioService;
 
