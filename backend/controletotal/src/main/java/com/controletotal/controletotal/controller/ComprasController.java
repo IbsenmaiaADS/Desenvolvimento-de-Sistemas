@@ -24,6 +24,7 @@ import java.time.LocalDate;
 @RestController
 @Validated
 @RequestMapping("compras")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @Tag(name = "compras", description = "Gerenciar compras")
 public class ComprasController {

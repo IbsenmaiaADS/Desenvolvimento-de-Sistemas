@@ -19,6 +19,7 @@ import java.util.List;
 @Validated
 @RequestMapping("fornecedores")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 @Tag(name = "fornecedores", description = "Gerenciar fornecedores")
 public class FornecedorController {
     private final FornecedorService fornecedorService;

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Solicitar item do estoque</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class="container mt-5">
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+      th:fragment="header"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/}">Cadastro de usuários</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
+    <br />
+    <br />
+    <br />
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="text-center">Solicitar item do estoque</h2>
+        </div>
+        <div class="card-body">
+          <form
+            method="post"
+            id="solicitarItemForm"
+            action="http://localhost:8080/saida-estoque/solicitar-item"
+          >
+            <div class="mb-3">
+              <label for="itemSelect" class="form-label"
+                >Selecione o item:</label
+              >
+              <select id="itemSelect" name="idItem" class="form-select">
+                <option value="">Selecione um item</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="quantidadeInput" class="form-label"
+                >Quantidade:</label
+              >
+              <input
+                type="number"
+                id="quantidadeInput"
+                name="quantidade"
+                class="form-control"
+                min="1"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <button type="submit" class="btn btn-primary">Solicitar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        fetch("http://localhost:8080/itens")
+          .then((response) => response.json())
+          .then((data) => {
+            const select = document.getElementById("itemSelect");
+            data.forEach((item) => {
+              const option = document.createElement("option");
+              option.value = item.id;
+              option.textContent = item.nome;
+              select.appendChild(option);
+            });
+          })
+          .catch((error) => console.error("Erro ao carregar os itens:", error));
+
+        const form = document.getElementById("solicitarItemForm");
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          fetch("http://localhost:8080/saida-estoque/solicitar-item", {
+            method: "POST",
+            body: new FormData(form),
+          })
+            .then((response) => {
+              if (response.ok) {
+                window.location.href = "solicitacoesEstoque.html";
+              } else {
+                throw new Error("Erro ao solicitar o item");
+              }
+            })
+            .catch((error) =>
+              console.error("Erro ao solicitar o item:", error)
+            );
+        });
+      });
+    </script>
+  </body>
+</html>
