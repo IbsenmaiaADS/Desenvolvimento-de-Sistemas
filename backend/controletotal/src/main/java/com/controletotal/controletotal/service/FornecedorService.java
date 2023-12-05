@@ -36,6 +36,14 @@ public class FornecedorService {
         }
     }
 
+    public Fornecedor buscaFornecedorPeloNome(String nome) {
+        if (nome != null) {
+            return fornecedorRepository.findByNome(nome);
+        } else {
+            throw new ErroDeNegocio("Fornecedor não encontrado com o nome: " + nome);
+        }
+    }
+
     public Fornecedor cadastraFornecedor(FornecedorDto fornecedorDto) {
         if (fornecedorRepository.findByNomeIgnoreCase(fornecedorDto.getNome()).isPresent()) {
             throw new ErroDeNegocio("Já existe um fornecedor com o mesmo nome");

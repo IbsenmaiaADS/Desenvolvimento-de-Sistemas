@@ -8,7 +8,7 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
-<link href="css/style.css" rel="stylesheet">
+<link th:href="@{/css/style.css}" rel="stylesheet">
 
   <title>Menu de funcionalidades</title>
 </head>
@@ -30,34 +30,42 @@
         <div class="col-sm-6 mb-3 mb-sm-0">
           <div class="card card-menu">
             
-            <div class="card-body btn" href="fornecedores.html">
+            <a th:href="@{/fornecedores/menu}">
+            <div class="card-body btn">
               <h5 class="card-title">Gerenciar fornecedores</h5>
               <p class="card-text">Cadastre, liste, edite ou exclua fornecedores do sistema.</p>
             </div>
+        </a>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="card card-menu">
-            <div class="card-body btn" href="solicitacoesEstoque.html">
+            <a th:href="@{/solicitacoesEstoque/menu}">
+            <div class="card-body btn">
               <h5 class="card-title">Gerenciar solicitações de itens do estoque</h5>
               <p class="card-text">Solicite itens do estoque, aprove ou reprove solicitações e gere relatórios de estoque.</p>
             </div>
+            </a>
           </div>
         </div>
         <div class="col-sm-6">
             <div class="card card-menu">
-              <div class="card-body btn" href="usuarios.html">
+                <a th:href="@{/usuarios/menu}">
+              <div class="card-body btn">
                 <h5 class="card-title">Gerenciar usuários</h5>
                 <p class="card-text">Cadastre, liste, edite ou exclua usuários do sistema.</p>
               </div>
+            </a>
             </div>
           </div>
           <div class="col-sm-6">
             <div class="card card-menu">
-              <div class="card-body btn" href="itens.html">
+                <a th:href="@{/itens/menu}">
+              <div class="card-body btn">
                 <h5 class="card-title">Gerenciar itens</h5>
                 <p class="card-text">Cadastre, liste, edite ou exclua itens do sistema.</p>
               </div>
+            </a>
             </div>
           </div>
       </div>

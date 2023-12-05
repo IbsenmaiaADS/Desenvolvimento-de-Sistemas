@@ -10,18 +10,40 @@ import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@RestController
+@Controller
 @Validated
 @RequestMapping("fornecedores")
 @RequiredArgsConstructor
 @Tag(name = "fornecedores", description = "Gerenciar fornecedores")
 public class FornecedorController {
     private final FornecedorService fornecedorService;
+
+    @GetMapping("/cadastro")
+    public String formularioCadastro(Model model){
+        FornecedorDto fornecedor = new FornecedorDto();
+        model.addAttribute("fornecedor", fornecedor);
+        return "cadastroFornecedor";
+    }
+
+    @GetMapping("/lista")
+    public ModelAndView listaView() {
+    ModelAndView mv = new ModelAndView("listaFornecedores");
+    List<Fornecedor> fornecedor = fornecedorService.buscaTodosOsFornecedores();
+    if( !fornecedor.isEmpty() ) {
+      mv.addObject("fornecedor", fornecedor);
+      return mv;
+    }
+      return mv;
+    }
 
     @GetMapping
     @Operation(summary = "Busca todos os fornecedores")
@@ -37,18 +59,27 @@ public class FornecedorController {
         return ResponseEntity.ok(fornecedorService.buscaFornecedor(id, nome));
     }
 
-    @PostMapping("/cadastrar")
+    @PostMapping("/cadastrar/save")
     @Operation(summary = "Cadastra fornecedores")
-    public ResponseEntity<Fornecedor> cadastrarFornecedor(@Valid @RequestBody FornecedorDto fornecedorDto) {
-        return ResponseEntity.ok(fornecedorService.cadastraFornecedor(fornecedorDto));
+    public String cadastrarFornecedor(@ModelAttribute("fornecedor") @Valid FornecedorDto fornecedorDto, BindingResult result, Model model) {
+        if (fornecedorService.buscaFornecedorPeloNome(fornecedorDto.getNome()) != null) {
+            result.rejectValue("nome", null, "Já existe um fornecedor registrado com esse nome.");
+        } 
+
+        if (result.hasErrors()) {
+            model.addAttribute("fornecedor", fornecedorDto);
+            return "cadastroFornecedor";
+        }
+
+        ResponseEntity.status(HttpStatus.CREATED).body(fornecedorService.cadastraFornecedor(fornecedorDto));
+        return "redirect:/fornecedores/cadastro?success";
     }
 
 
-    @PatchMapping("/atualizar")
+    @PatchMapping("/atualizar/{id}")
     @Operation(summary = "Edita fornecedores")
     public ResponseEntity<Fornecedor> atualizarFornecedor(
-            @RequestParam(required = false)
-            @NotNull(message = "É obrigatório informar o id do fornecedor")
+            @PathVariable
             Long id,
             @RequestParam(required = false)
             String nome,

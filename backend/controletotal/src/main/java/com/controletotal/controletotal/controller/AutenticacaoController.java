@@ -25,8 +25,7 @@ import org.springframework.web.bind.annotation.*;
 public class AutenticacaoController {
     @Autowired
     private AuthenticationManager authenticationManager;
-    // @Autowired
-    // private TokenService tokenService;
+
     @Autowired
     private UsuarioService usuarioService;
 
@@ -36,27 +35,11 @@ public class AutenticacaoController {
     }
 
     @GetMapping("/cadastrar")
-    public String showRegistrationForm(Model model){
+    public String formularioCadastro(Model model){
         UsuarioDto usuario = new UsuarioDto();
         model.addAttribute("usuario", usuario);
         return "cadastrar";
     }
-
-    // @PostMapping("/login")
-    // public ResponseEntity login(@RequestBody @Valid AutenticacaoDto autenticacaoDto){
-    //     try {
-    //         UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(autenticacaoDto.getEmail(), autenticacaoDto.getSenha());
-    //         Authentication auth = authenticationManager.authenticate(usernamePassword);
-
-    //         String token = tokenService.gerarToken((Usuario)
-    //                 auth.getPrincipal());
-
-    //         return ResponseEntity.ok(new LoginResponseDTO(token));
-    //     } catch (AuthenticationException ex) {
-    //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Não existe usuário com essas credenciais.");
-    //     }
-
-    // }
 
     @PostMapping("/cadastrar/save")
     public String cadastraUsuario(@RequestBody @ModelAttribute("usuario") @Valid UsuarioDto usuarioDto, BindingResult result, Model model){
