@@ -19,6 +19,7 @@ import java.util.List;
 @Validated
 @RequestMapping("fornecedores")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 @Tag(name = "fornecedores", description = "Gerenciar fornecedores")
 public class FornecedorController {
     private final FornecedorService fornecedorService;
@@ -63,4 +64,15 @@ public class FornecedorController {
     public void deletarFornecedor(@PathVariable Long id) {
         fornecedorService.deletaFornecedor(id);
     }
+
+    @GetMapping("/itens")
+    @Operation(summary = "Listar itens de um fornecedor")
+    public ResponseEntity<List<ItensFornecedorDto>> buscarItensFornecedor(
+            @RequestParam(required = false)
+            @NotNull(message = "É obrigatório informar o id do fornecedor")
+            Long id
+    ) {
+        return ResponseEntity.ok(fornecedorService.buscarItens(id));
+    }
+
 }
