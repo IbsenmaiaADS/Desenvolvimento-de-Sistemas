@@ -21,6 +21,7 @@ import java.util.List;
 @Validated
 @RequestMapping("itens")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 @Tag(name = "itens", description = "Gerenciar itens do estoque")
 public class ItemController {
 

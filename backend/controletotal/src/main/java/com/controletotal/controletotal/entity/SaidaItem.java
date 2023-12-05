@@ -36,6 +36,4 @@ public class SaidaItem {
 
     @Column(name = "st_saida")
     private int situacaoSaida;
-
-    //adicionar referencia do usuario solicitante
 }
