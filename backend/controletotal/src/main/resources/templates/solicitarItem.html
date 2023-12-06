@@ -25,6 +25,9 @@
     <br />
     <div class="container">
       <div class="card">
+        <div th:if="${param.success}">
+          <div class="alert alert-info">Solicitação realizada com sucesso.</div>
+      </div>
         <div class="card-header">
           <h2 class="text-center">Solicitar item do estoque</h2>
         </div>
@@ -59,6 +62,9 @@
               <button type="submit" class="btn btn-primary">Solicitar</button>
             </div>
           </form>
+          <div class="mb-3">
+            <a class="btn btn-primary" th:href="@{/solicitacoesEstoque/menu}">Voltar</a>
+        </div>
         </div>
       </div>
     </div>
@@ -89,6 +95,7 @@
             .then((response) => {
               if (response.ok) {
                 window.location.href = "solicitacoesEstoque.html";
+                <div class="alert alert-info">Solicitação realizada com sucesso.</div>
               } else {
                 throw new Error("Erro ao solicitar o item");
               }

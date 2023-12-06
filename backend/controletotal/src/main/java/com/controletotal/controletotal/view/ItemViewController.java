@@ -75,7 +75,7 @@ public class ItemViewController {
         @PathVariable("id") Long id) {
         ModelAndView mv = new ModelAndView("editarItem");
 
-        Item item = itemService.buscaItem(id, null);
+        Item item = itemService.buscaItemPeloId(id);
 
         if(item != null) {
             mv.addObject("item", item);

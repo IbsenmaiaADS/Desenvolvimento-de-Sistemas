@@ -15,45 +15,43 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" th:fragment="header">
         <div class="container-fluid">
-            <a class="navbar-brand" th:href="@{/}">Home</a>
-            <a class="navbar-brand" th:href="@{/logout}">Logout</a>
+          <a class="navbar-brand" th:href="@{/}">Home</a>
+          <a class="navbar-brand" th:href="@{/logout}">Logout</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
     </nav>
+    <br />
+<br />
+<br />
     <main>
     <div class="header">
-        <h2 class="text-center menu-titulo">Itens</h2>
-
+        <h2 class="text-center menu-titulo">Gerenciar compras</h2>
     </div>
-    <table class="table">
-    </div>
-    <div th:if="${param.success}">
-        <div class="alert alert-info">Item deletado com sucesso.</div>
-    </div>
-        <thead>
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Nome</th>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr data-th-each="item : ${itens}">
-            <td data-th-text="${item.id}"></td>
-            <td data-th-text="${item.nome}"></td>
-            <td>
-            <a class="btn btn-primary" onclick="return confirm('Tem certeza de que quer deletar esse item?')" th:href="@{#}">Deletar</a>
-            </td>
-            <td>
-              <a class="btn btn-primary" th:href="@{#}">Editar</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="row menu">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+          <div class="card card-menu">
+            <a th:href="@{/compra/relatorio}">
+            <div class="card-body btn">
+              <h5 class="card-title">Gerar relatório de compras</h5>
+            </div>
+        </a>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="card card-menu">
+            <a th:href="@{/compra/cadastrar}">
+            <div class="card-body btn">
+                <h5 class="card-title">Cadastrar compras</h5>
+              </div>
+            </a>
+            </div>
+          </div>
+      </div>
       <div class="mb-3">
-        <a class="btn btn-primary" th:href="@{/item/menu}">Voltar</a>
+        <a class="btn btn-primary" th:href="@{/}">Voltar</a>
+    </div>
     </div>
     </main>
 </body>

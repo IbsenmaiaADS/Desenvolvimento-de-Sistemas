@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.http.HttpMethod;
+
 
 @Configuration
 @EnableWebSecurity
@@ -22,33 +24,33 @@ public class SecurityConfigurations {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests
                         ((authorize) -> authorize
-                        // .requestMatchers("/swagger-ui/index.html").permitAll()
-                        // .requestMatchers("/swagger-ui/**").permitAll()
-                        // .requestMatchers("/v3/api-docs/**").permitAll()
-                        // .requestMatchers("/cadastrar.html").permitAll()
-                        // .requestMatchers(HttpMethod.POST,"/cadastrar").permitAll()
-                        // .requestMatchers("/login.html").permitAll()
-                        // .requestMatchers("/images/**", "/css/**", "/templates/**").permitAll()
-                        // .requestMatchers(HttpMethod.POST,"/login").permitAll()
+                        .requestMatchers("/swagger-ui/index.html").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/v3/api-docs/**").permitAll()
+                        .requestMatchers("/cadastrar.html").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/cadastrar").permitAll()
+                        .requestMatchers("/login.html").permitAll()
+                        .requestMatchers("/images/**", "/css/**", "/templates/**").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/login").permitAll()
 
-                        // .requestMatchers("/usuario").hasRole("ADMIN")
-                        // .requestMatchers("/usuario/**").hasRole("ADMIN")
-                        // // .requestMatchers(HttpMethod.POST,"/cadastrar").hasRole("ADMIN")
-                        // .requestMatchers("/saida-estoque/**").hasAnyRole("ADMIN", "ALMOXARIFE")
-                        // .requestMatchers("/itens/cadastrar").hasAnyRole("ADMIN", "ALMOXARIFE")
-                        // .requestMatchers("/itens/atualizar").hasAnyRole("ADMIN", "ALMOXARIFE")
-                        // .requestMatchers("/itens/deletar/**").hasAnyRole("ADMIN", "ALMOXARIFE")
-                        // .requestMatchers("/fornecedores/**").hasAnyRole("ADMIN", "ALMOXARIFE")
+                        .requestMatchers("/usuario").hasRole("ADMIN")
+                        .requestMatchers("/usuario/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST,"/cadastrar").hasRole("ADMIN")
+                        .requestMatchers("/saida-estoque/**").hasAnyRole("ADMIN", "ALMOXARIFE")
+                        .requestMatchers("/itens/cadastrar").hasAnyRole("ADMIN", "ALMOXARIFE")
+                        .requestMatchers("/itens/atualizar").hasAnyRole("ADMIN", "ALMOXARIFE")
+                        .requestMatchers("/itens/deletar/**").hasAnyRole("ADMIN", "ALMOXARIFE")
+                        .requestMatchers("/fornecedores/**").hasAnyRole("ADMIN", "ALMOXARIFE")
 
-                        .anyRequest().permitAll()
+                        .anyRequest().authenticated()
                 )
-                // .formLogin(form -> form
-                //     .loginPage("/login")
-                //     .usernameParameter("email")
-                //     .passwordParameter("senha")
-                //     .defaultSuccessUrl("/")
-                //     .permitAll()
-                // )
+                .formLogin(form -> form
+                    .loginPage("/login")
+                    .usernameParameter("email")
+                    .passwordParameter("senha")
+                    .defaultSuccessUrl("/")
+                    .permitAll()
+                )
                 .build();
     }
 
