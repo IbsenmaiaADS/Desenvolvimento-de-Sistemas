@@ -2,6 +2,7 @@ package com.controletotal.controletotal.view;
 
 import com.controletotal.controletotal.dto.FornecedorDto;
 import com.controletotal.controletotal.entity.Fornecedor;
+import com.controletotal.controletotal.entity.Usuario;
 import com.controletotal.controletotal.handler.ErroDeNegocio;
 import com.controletotal.controletotal.service.FornecedorService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -66,13 +67,14 @@ public class FornecedorViewController {
         @PathVariable("id") Long id) {
         ModelAndView mv = new ModelAndView("editarFornecedor");
 
-        Fornecedor fornecedor = fornecedorService.buscaFornecedor(id, null);
-
+        Fornecedor fornecedor = fornecedorService.buscaFornecedorPeloId(id);
+    
         if(fornecedor != null) {
             mv.addObject("fornecedor", fornecedor);
         } else {
             throw new ErroDeNegocio("Fornecedor não encontrado com o ID: " + id);
         }
+ 
 
         return mv;
     }

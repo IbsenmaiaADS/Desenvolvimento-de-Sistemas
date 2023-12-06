@@ -53,11 +53,8 @@ public class FornecedorController {
     public ResponseEntity<Fornecedor> atualizarFornecedor(
             @PathVariable
             Long id,
-            @RequestParam(required = false)
-            String nome,
-            @RequestParam(required = false)
-            String numTelefone) {
-        return ResponseEntity.ok(fornecedorService.atualizaFornecedor(id, nome, numTelefone));
+            @Valid @RequestBody FornecedorDto fornecedorDto) {
+        return ResponseEntity.ok(fornecedorService.atualizaFornecedor(id, fornecedorDto));
     }
 
     @DeleteMapping("/deletar/{id}")

@@ -44,6 +44,14 @@ public class FornecedorService {
         }
     }
 
+        public Fornecedor buscaFornecedorPeloId(Long id) {
+        if (id != null) {
+            return fornecedorRepository.findFornecedorById(id);
+        } else {
+            throw new ErroDeNegocio("Fornecedor não encontrado com o id: " + id);
+        }
+    }
+
     public Fornecedor cadastraFornecedor(FornecedorDto fornecedorDto) {
         if (fornecedorRepository.findByNomeIgnoreCase(fornecedorDto.getNome()).isPresent()) {
             throw new ErroDeNegocio("Já existe um fornecedor com o mesmo nome");

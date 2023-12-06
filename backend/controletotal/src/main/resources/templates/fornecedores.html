@@ -46,10 +46,10 @@
             <td data-th-text="${fornecedor.nome}"></td>
             <td data-th-text="${fornecedor.numTelefone}"></td>
             <td>
-            <a class="btn btn-primary" onclick="return confirm('Tem certeza de que quer deletar esse fornecedor?')" th:href="@{/fornecedor/deletar/{id}(id=${fornecedor.getId()})}">Deletar</a>
+            <a class="btn btn-primary" onclick="return confirm('Tem certeza de que quer deletar esse fornecedor?')" th:href="@{/fornecedor/deletar/{id}(id=${fornecedor.id})}">Deletar</a>
             </td>
             <td>
-              <a class="btn btn-primary" th:href="@{/fornecedor/editar/{id}(id=${fornecedor.getId()})}">Editar</a>
+              <a class="btn btn-primary" th:href="@{/fornecedor/editar/{id}(id=${fornecedor.id})}">Editar</a>
             </td>
           </tr>
         </tbody>
