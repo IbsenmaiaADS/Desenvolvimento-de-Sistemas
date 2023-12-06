@@ -9,10 +9,11 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-items: center;
 
     height: 100%;
-    width: 100%;
+    width: 50%;
+
+    background-color: antiquewhite;
 }
 
 .card {
@@ -26,11 +27,15 @@ body {
     /* margin: 20px; */
 }
 
+main {
+    margin: 100px auto;
+}
+
 .menu {
     margin: 100px 200px 100px 200px;
 }
 .menu-titulo {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
