@@ -2,12 +2,10 @@ package com.controletotal.controletotal.view;
 
 import com.controletotal.controletotal.dto.UsuarioDto;
 import com.controletotal.controletotal.entity.Usuario;
-import com.controletotal.controletotal.enums.TipoUsuario;
 import com.controletotal.controletotal.handler.ErroDeNegocio;
 import com.controletotal.controletotal.service.UsuarioService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
@@ -16,7 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.thymeleaf.util.ContentTypeUtils;
 
 import java.lang.Long;
 import java.util.List;

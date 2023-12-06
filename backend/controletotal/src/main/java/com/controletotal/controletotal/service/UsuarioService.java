@@ -2,7 +2,6 @@ package com.controletotal.controletotal.service;
 
 import com.controletotal.controletotal.dto.UsuarioDto;
 import com.controletotal.controletotal.entity.Usuario;
-import com.controletotal.controletotal.enums.TipoUsuario;
 import com.controletotal.controletotal.handler.ErroDeNegocio;
 import com.controletotal.controletotal.repository.UsuarioRepository;
 import jakarta.validation.Valid;

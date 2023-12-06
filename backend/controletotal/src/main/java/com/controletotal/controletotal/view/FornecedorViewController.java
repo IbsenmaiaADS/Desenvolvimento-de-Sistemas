@@ -2,7 +2,6 @@ package com.controletotal.controletotal.view;
 
 import com.controletotal.controletotal.dto.FornecedorDto;
 import com.controletotal.controletotal.entity.Fornecedor;
-import com.controletotal.controletotal.entity.Usuario;
 import com.controletotal.controletotal.handler.ErroDeNegocio;
 import com.controletotal.controletotal.service.FornecedorService;
 import io.swagger.v3.oas.annotations.tags.Tag;

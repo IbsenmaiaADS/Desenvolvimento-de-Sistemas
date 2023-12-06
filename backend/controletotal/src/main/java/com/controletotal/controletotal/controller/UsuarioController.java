@@ -1,7 +1,6 @@
 package com.controletotal.controletotal.controller;
 
 import com.controletotal.controletotal.entity.Usuario;
-import com.controletotal.controletotal.enums.TipoUsuario;
 import com.controletotal.controletotal.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -2,7 +2,6 @@ package com.controletotal.controletotal.entity;
 
 import com.controletotal.controletotal.enums.TipoUsuario;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
