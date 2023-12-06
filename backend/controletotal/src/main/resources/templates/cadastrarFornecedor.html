@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Controle Total</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" th:fragment="header">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/}">Home</a>
+            <a class="navbar-brand" th:href="@{/logout}">Logout</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+<br />
+<br />
+<br />
+<div class="container">
+    <div class="row col-md-8 offset-md-2">
+        <div class="card">
+            <div th:if="${param.success}">
+                <div class="alert alert-info">Cadastro realizado com sucesso.</div>
+            </div>
+            <div th:if="${param.error}">
+              <div class="alert alert-danger">Erro ao cadastrar.</div>
+          </div>
+            <div class="card-header">
+                <h2 class="text-center">Cadastrar novo fornecedor</h2>
+            </div>
+            <div class="card-body">
+                <form method="post" role="form" th:action="@{/fornecedor/cadastrar}" th:object="${fornecedor}">
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Nome</label>
+                        <input class="form-control"
+                               id="nome"
+                               name="nome"
+                               placeholder="Insira o nome ou razão social do fornecedor"
+                               th:field="*{nome}"
+                               type="text"
+                        />
+                        <p th:errors="*{nome}" class="text-danger"
+                           th:if="${#fields.hasErrors('nome')}">
+                        </p>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Número de telefone</label>
+                        <input class="form-control"
+                               id="numTelefone"
+                               name="numTelefone"
+                               placeholder="Insira o número de telefone do fornecedor"
+                               th:field="*{numTelefone}"
+                               type="text"
+                        />
+                        <p th:errors="*{numTelefone}" class="text-danger"
+                           th:if="${#fields.hasErrors('numTelefone')}">
+                        </p>
+                    </div>
+                      <br />
+                  <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                </div>
+                
+                </form>
+                <div class="mb-3">
+                    <a class="btn btn-primary" th:href="@{/fornecedor/menu}">Voltar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

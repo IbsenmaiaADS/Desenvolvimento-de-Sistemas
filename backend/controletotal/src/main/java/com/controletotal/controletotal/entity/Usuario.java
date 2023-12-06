@@ -2,7 +2,6 @@ package com.controletotal.controletotal.entity;
 
 import com.controletotal.controletotal.enums.TipoUsuario;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -28,15 +27,15 @@ public class Usuario implements UserDetails {
     @Column(name = "id_usuario")
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "Nome do usuario é obrigatório")
     @Column(name = "nm_usuario")
     private String nome;
 
-    @NotBlank
+    @NotBlank(message = "Um e-mail é obrigatório")
     @Column(name = "email_usuario")
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "Senha é obrigatório") 
     @JsonIgnore
     @Column(name = "senha_usuario")
     private String senha;
@@ -44,9 +43,9 @@ public class Usuario implements UserDetails {
     @Column(name = "tipo_usuario")
     private TipoUsuario tipo;
 
-    public Usuario(String nome, String login, String senha, TipoUsuario tipo){
+    public Usuario(String nome, String email, String senha, TipoUsuario tipo){
         this.nome = nome;
-        this.email = login;
+        this.email = email;
         this.senha = senha;
         this.tipo = tipo;
     }

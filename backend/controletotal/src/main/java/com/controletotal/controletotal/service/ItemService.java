@@ -25,6 +25,26 @@ public class ItemService {
         return itemRepository.findAll();
     }
 
+       public List<ItemFornecedor> buscaTodosOsItensRelacionadosComFornecedor() {
+        return itemFornecedorRepository.findAll();
+    }
+
+    public Item buscaItemPeloNome(String nome) {
+        if(nome != null) {
+            return itemRepository.findByNome(nome);
+        } else {
+            throw new ErroDeNegocio("Item não encontrado com o nome: " + nome);
+        }
+    }
+    
+    public Item buscaItemPeloId(Long id) {
+        if(id != null) {
+            return itemRepository.findItemById(id);
+        } else {
+            throw new ErroDeNegocio("Item não encontrado com o id: " + id);
+        }
+    }
+
     public Item buscaItem(Long id, String nome) {
         validaBuscaItem(id, nome);
 

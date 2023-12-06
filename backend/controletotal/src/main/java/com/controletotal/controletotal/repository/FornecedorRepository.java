@@ -11,5 +11,9 @@ public interface FornecedorRepository extends JpaRepository<Fornecedor, Long> {
 
     Optional<Fornecedor> findByNomeIgnoreCase(String nome);
 
+    Fornecedor findFornecedorById(Long id);
+
+    Fornecedor findByNome(String nome);
+
 }
 

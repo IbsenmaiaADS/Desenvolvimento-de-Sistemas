@@ -10,12 +10,13 @@ import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @Validated
 @RequestMapping("fornecedores")
 @RequiredArgsConstructor
@@ -39,23 +40,19 @@ public class FornecedorController {
     }
 
     @PostMapping("/cadastrar")
-    @Operation(summary = "Cadastra fornecedores")
+    @Operation(summary = "Cadastra fornecedor")
     public ResponseEntity<Fornecedor> cadastrarFornecedor(@Valid @RequestBody FornecedorDto fornecedorDto) {
         return ResponseEntity.ok(fornecedorService.cadastraFornecedor(fornecedorDto));
     }
 
 
-    @PatchMapping("/atualizar")
+    @PatchMapping("/atualizar/{id}")
     @Operation(summary = "Edita fornecedores")
     public ResponseEntity<Fornecedor> atualizarFornecedor(
-            @RequestParam(required = false)
-            @NotNull(message = "É obrigatório informar o id do fornecedor")
+            @PathVariable
             Long id,
-            @RequestParam(required = false)
-            String nome,
-            @RequestParam(required = false)
-            String numTelefone) {
-        return ResponseEntity.ok(fornecedorService.atualizaFornecedor(id, nome, numTelefone));
+            @Valid @RequestBody FornecedorDto fornecedorDto) {
+        return ResponseEntity.ok(fornecedorService.atualizaFornecedor(id, fornecedorDto));
     }
 
     @DeleteMapping("/deletar/{id}")

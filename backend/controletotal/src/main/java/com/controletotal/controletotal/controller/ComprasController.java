@@ -59,7 +59,7 @@ public class ComprasController {
         return prepareResponseDataWithHeaders(situacao, pdf);
     }
 
-    private ResponseEntity<InputStreamResource> prepareResponseDataWithHeaders(String situacao, PdfDto pdf) {
+    public ResponseEntity<InputStreamResource> prepareResponseDataWithHeaders(String situacao, PdfDto pdf) {
         var responseHeaders = new HttpHeaders();
         responseHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
         responseHeaders.add(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment; filename=relatorio_%s.pdf", situacao));
