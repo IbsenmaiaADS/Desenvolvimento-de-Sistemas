@@ -34,27 +34,4 @@ public class AutenticacaoController {
         return "login";
     }
 
-    @GetMapping("/cadastrar")
-    public String formularioCadastro(Model model){
-        UsuarioDto usuario = new UsuarioDto();
-        model.addAttribute("usuario", usuario);
-        return "cadastrar";
-    }
-
-    @PostMapping("/cadastrar/save")
-    public String cadastraUsuario(@RequestBody @ModelAttribute("usuario") @Valid UsuarioDto usuarioDto, BindingResult result, Model model){
-
-        if (usuarioService.buscaUsuarioPorEmail(usuarioDto.getEmail()) != null) {
-            result.rejectValue("email", null, "Já existe um usuário registrado com esse email.");
-        } 
-
-        if (result.hasErrors()) {
-            model.addAttribute("usuario", usuarioDto);
-            return "cadastrar";
-        }
-
-        ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.cadastraUsuario(usuarioDto)).getBody();
-        return "redirect:/cadastrar?success";
-    }
-
 }

@@ -6,16 +6,13 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @ToString
-@Builder
 public class UsuarioDto {
-    
+
     @NotBlank(message = "Nome do usuario é obrigatório")
     private String nome;
 
-    @NotBlank(message = "Um e-mail é obrigatório")
     private String email;
     
-    @NotBlank(message = "Senha é obrigatório")
     private String senha;
 
     private TipoUsuario tipo;

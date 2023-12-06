@@ -12,4 +12,5 @@ import java.util.Optional;
 public interface ItemFornecedorRepository extends JpaRepository<ItemFornecedor, Long> {
 
     Optional<ItemFornecedor> findByItemAndFornecedor(Item item, Fornecedor fornecedor);
+    
 }

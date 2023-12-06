@@ -15,8 +15,8 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" th:fragment="header">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Home</a>
-            <a class="navbar-brand" th:href="@{/logout}">Logout</a>
+          <a class="navbar-brand" th:href="@{/}">Home</a>
+          <a class="navbar-brand" th:href="@{/logout}">Logout</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -24,51 +24,32 @@
     </nav>
     <main>
     <div class="header">
-        <h2 class="text-center menu-titulo">Menu de funcionalidades</h2>
+        <h2 class="text-center menu-titulo">Gerenciar usuários</h2>
     </div>
     <div class="row menu">
         <div class="col-sm-6 mb-3 mb-sm-0">
           <div class="card card-menu">
-            
-            <a th:href="@{/fornecedor/menu}">
+            <a th:href="@{/usuario/listar}">
             <div class="card-body btn">
-              <h5 class="card-title">Gerenciar fornecedores</h5>
-              <p class="card-text">Cadastre, liste, edite ou exclua fornecedores do sistema.</p>
+              <h5 class="card-title">Listar usuários</h5>
             </div>
         </a>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="card card-menu">
-            <a th:href="@{/solicitacoesEstoque/menu}">
+            <a th:href="@{/usuario/cadastrar}">
             <div class="card-body btn">
-              <h5 class="card-title">Gerenciar solicitações de itens do estoque</h5>
-              <p class="card-text">Solicite itens do estoque, aprove ou reprove solicitações e gere relatórios de estoque.</p>
-            </div>
-            </a>
-          </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="card card-menu">
-                <a th:href="@{/usuario/menu}">
-              <div class="card-body btn">
-                <h5 class="card-title">Gerenciar usuários</h5>
-                <p class="card-text">Cadastre, liste, edite ou exclua usuários do sistema.</p>
-              </div>
-            </a>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="card card-menu">
-                <a th:href="@{/item/menu}">
-              <div class="card-body btn">
-                <h5 class="card-title">Gerenciar itens</h5>
-                <p class="card-text">Cadastre, liste, edite ou exclua itens do sistema.</p>
+                <h5 class="card-title">Cadastrar usuários</h5>
               </div>
             </a>
             </div>
           </div>
       </div>
+      <div class="mb-3">
+        <a class="btn btn-primary" th:href="@{/}">Voltar</a>
+    </div>
+    </div>
     </main>
 </body>
 </html>

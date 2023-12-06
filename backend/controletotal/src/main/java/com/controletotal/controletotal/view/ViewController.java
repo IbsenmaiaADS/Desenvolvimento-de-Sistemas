@@ -1,4 +1,4 @@
-package com.controletotal.controletotal.controller;
+package com.controletotal.controletotal.view;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,15 +19,24 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ViewController {
 
-    private final FornecedorService fornecedorService;
-
     @GetMapping("/")
     public String menu() {
         return "index";
     }
 
-    @GetMapping("/fornecedores/menu")
-    public String fornecedores() {
-        return "fornecedores";
+    @GetMapping("/fornecedor/menu")
+    public String fornecedoresMenu() {
+        return "gerenciarFornecedores";
+    }
+
+    
+    @GetMapping("/usuario/menu")
+    public String usuariosMenu() {
+        return "gerenciarUsuarios";
+    }
+
+    @GetMapping("/item/menu")
+    public String itensMenu() {
+        return "gerenciarItens";
     }
 }

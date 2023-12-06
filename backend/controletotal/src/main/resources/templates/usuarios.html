@@ -24,38 +24,40 @@
     </nav>
     <main>
     <div class="header">
-        <h2 class="text-center menu-titulo">Fornecedores</h2>
+        <h2 class="text-center menu-titulo">Usuários</h2>
 
     </div>
     <table class="table">
     </div>
     <div th:if="${param.success}">
-        <div class="alert alert-info">Fornecedor deletado com sucesso.</div>
+        <div class="alert alert-info">Usuário deletado com sucesso.</div>
     </div>
         <thead>
           <tr>
             <th scope="col">Id</th>
             <th scope="col">Nome</th>
-            <th scope="col">Número de telefone</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Tipo</th>
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr data-th-each="fornecedor : ${fornecedores}">
-            <td data-th-text="${fornecedor.id}"></td>
-            <td data-th-text="${fornecedor.nome}"></td>
-            <td data-th-text="${fornecedor.numTelefone}"></td>
+          <tr data-th-each="usuario : ${usuarios}">
+            <td data-th-text="${usuario.id}"></td>
+            <td data-th-text="${usuario.nome}"></td>
+            <td data-th-text="${usuario.email}"></td>
+            <td data-th-text="${usuario.tipo}"></td>
             <td>
-            <a class="btn btn-primary" onclick="return confirm('Tem certeza de que quer deletar esse fornecedor?')" th:href="@{/fornecedor/deletar/{id}(id=${fornecedor.getId()})}">Deletar</a>
+            <a class="btn btn-primary" onclick="return confirm('Tem certeza de que quer deletar esse usuário?')" th:href="@{/usuario/deletar/{id}(id=${usuario.getId()})}">Deletar</a>
             </td>
             <td>
-              <a class="btn btn-primary" th:href="@{/fornecedor/editar/{id}(id=${fornecedor.getId()})}">Editar</a>
+              <a class="btn btn-primary" th:href="@{/usuario/editar/{id}(id=${usuario.getId()})}">Editar</a>
             </td>
           </tr>
         </tbody>
       </table>
       <div class="mb-3">
-        <a class="btn btn-primary" th:href="@{/fornecedor/menu}">Voltar</a>
+        <a class="btn btn-primary" th:href="@{/usuario/menu}">Voltar</a>
     </div>
     </main>
 </body>
