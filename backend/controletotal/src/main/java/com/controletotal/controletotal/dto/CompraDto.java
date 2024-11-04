@@ -1,6 +1,7 @@
 package com.controletotal.controletotal.dto;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode
 public class CompraDto {
     @NotNull(message = "Id do fornecedor é obrigatório")
     Long idFornecedor;

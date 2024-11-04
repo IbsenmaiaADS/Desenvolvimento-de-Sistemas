@@ -2,9 +2,11 @@ package com.controletotal.controletotal.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
+@EqualsAndHashCode
 @Table(name = "tb_item_fornecedor", schema = "controletotal")
 public class ItemFornecedor {
     @Id

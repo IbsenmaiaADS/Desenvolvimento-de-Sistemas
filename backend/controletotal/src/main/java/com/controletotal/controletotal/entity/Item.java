@@ -3,11 +3,13 @@ package com.controletotal.controletotal.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
 @Data
 @Entity
+@EqualsAndHashCode
 @Table(name = "tb_item", schema = "controletotal")
 public class Item {
 
